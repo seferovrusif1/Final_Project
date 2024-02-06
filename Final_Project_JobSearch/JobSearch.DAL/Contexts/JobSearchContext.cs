@@ -1,4 +1,4 @@
-﻿using JobSearch.Core;
+﻿using JobSearch.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

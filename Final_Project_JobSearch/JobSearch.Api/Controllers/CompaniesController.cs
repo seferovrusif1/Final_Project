@@ -7,5 +7,11 @@ namespace JobSearch.Api.Controllers
     [ApiController]
     public class CompaniesController : ControllerBase
     {
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Problem("Hi");
+        }
     }
 }

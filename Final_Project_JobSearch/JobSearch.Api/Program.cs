@@ -1,4 +1,4 @@
-using JobSearch.Core;
+using JobSearch.Core.Entities;
 using JobSearch.DAL.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
