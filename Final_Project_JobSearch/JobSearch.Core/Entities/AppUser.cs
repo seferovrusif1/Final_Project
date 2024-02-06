@@ -6,5 +6,8 @@ namespace JobSearch.Core.Entities
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public IEnumerable<JobSeeker>? Seekers { get; set; }
+        public IEnumerable<Company>? Companys { get; set; }
+        public IEnumerable<Vacancy>? Vacancies { get; set; }
     }
 }

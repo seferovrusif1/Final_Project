@@ -2,5 +2,7 @@
 {
     public class Gender : BaseEntity
     {
+        public string Title { get; set; }
+
     }
 }

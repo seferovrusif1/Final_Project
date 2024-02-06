@@ -2,5 +2,7 @@
 {
     public class TypeOfVacancy:BaseEntity
     {
+        public string Title { get; set; }
+
     }
 }
