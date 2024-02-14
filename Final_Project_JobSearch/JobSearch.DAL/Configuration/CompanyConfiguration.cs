@@ -24,6 +24,15 @@ namespace JobSearch.DAL.Configuration
             builder.Property(a => a.Website)
                 .IsRequired()
                 .HasMaxLength(256);
+            builder.HasOne(x => x.User)
+                  .WithMany(u => u.Companies)
+                  .HasForeignKey(x => x.UserId); 
+            builder.HasOne(x => x.Email)
+                  .WithMany(u => u.Companies)
+                  .HasForeignKey(x => x.EmailId);
+            builder.HasOne(x => x.Phone)
+                  .WithMany(u => u.Companies)
+                  .HasForeignKey(x => x.PhoneId);
         }
 
     }

@@ -2,7 +2,7 @@
 {
     public class Company : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public AppUser? User { get; set; }
         public string Name { get; set; }
         public string About { get; set; }

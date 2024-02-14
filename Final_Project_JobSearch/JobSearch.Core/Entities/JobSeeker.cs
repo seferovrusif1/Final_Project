@@ -2,7 +2,7 @@
 {
     public class JobSeeker : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public AppUser? User { get; set; }
         public int EmailId { get; set; }
         public Email? Email { get; set; }
