@@ -9,41 +9,41 @@ using System.Threading.Tasks;
 
 namespace JobSearch.DAL.Configuration
 {
-    public class JobSeekerConfiguration : IEntityTypeConfiguration<JobSeeker>
-    {
-        public void Configure(EntityTypeBuilder<JobSeeker> builder)
-        {
-            builder.Property(a => a.Skills)
-                .HasMaxLength(1024);
-            builder.Property(a => a.LanguageSkills)
-                .HasMaxLength(512);
-            builder.Property(a => a.Position)
-                .IsRequired()
-                .HasMaxLength(128);
-            builder.Property(a => a.Name)
-                .IsRequired()
-                .HasMaxLength(32);
-            builder.Property(a => a.Surname)
-                            .IsRequired()
-                .HasMaxLength(32);
-            builder.Property(a => a.FatherName)
-                            .IsRequired()
-                .HasMaxLength(32);
-            builder.Property(a => a.AdditionalInformation)
-               .HasMaxLength(1024);
-            builder.Property(a => a.BirthDate)
-                .IsRequired()
-                .HasColumnType("date");
-            builder.Property(a => a.ExperienceDetail)
-                .IsRequired().
-                HasMaxLength(1024);
-            builder.Property(a => a.EducationDetail)
-                            .IsRequired().
-                            HasMaxLength(1024);
-            builder.Property(a => a.CVImgUrl)
-                .HasMaxLength(64);
-            builder.Property(a => a.ImageUrl)
-                .HasMaxLength(64);
-        }
-    }
+    //public class JobSeekerConfiguration : IEntityTypeConfiguration<JobSeeker>
+    //{
+    //    public void Configure(EntityTypeBuilder<JobSeeker> builder)
+    //    {
+    //        builder.Property(a => a.Skills)
+    //            .HasMaxLength(1024);
+    //        builder.Property(a => a.LanguageSkills)
+    //            .HasMaxLength(512);
+    //        builder.Property(a => a.Position)
+    //            .IsRequired()
+    //            .HasMaxLength(128);
+    //        builder.Property(a => a.Name)
+    //            .IsRequired()
+    //            .HasMaxLength(32);
+    //        builder.Property(a => a.Surname)
+    //                        .IsRequired()
+    //            .HasMaxLength(32);
+    //        builder.Property(a => a.FatherName)
+    //                        .IsRequired()
+    //            .HasMaxLength(32);
+    //        builder.Property(a => a.AdditionalInformation)
+    //           .HasMaxLength(1024);
+    //        builder.Property(a => a.BirthDate)
+    //            .IsRequired()
+    //            .HasColumnType("date");
+    //        builder.Property(a => a.ExperienceDetail)
+    //            .IsRequired().
+    //            HasMaxLength(1024);
+    //        builder.Property(a => a.EducationDetail)
+    //                        .IsRequired().
+    //                        HasMaxLength(1024);
+    //        builder.Property(a => a.CVImgUrl)
+    //            .HasMaxLength(64);
+    //        builder.Property(a => a.ImageUrl)
+    //            .HasMaxLength(64);
+    //    }
+    //}
 }

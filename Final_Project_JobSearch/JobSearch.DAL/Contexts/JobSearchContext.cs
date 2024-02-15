@@ -5,10 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobSearch.DAL.Contexts
 {
-    public class JobSearchContext : IdentityDbContext<AppUser>
+    public class JobSearchContext : IdentityDbContext
     {
         public JobSearchContext(DbContextOptions options) : base(options){}
-        public DbSet<Company> Companys { get; set; }
+        public DbSet<AppUser> Users { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Phone> Phones { get; set; }
+        public DbSet<Email> Emails { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries<BaseEntity>();

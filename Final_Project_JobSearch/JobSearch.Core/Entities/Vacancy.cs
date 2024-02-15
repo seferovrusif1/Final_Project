@@ -3,7 +3,7 @@
     public class Vacancy : BaseEntity
     {
         public string UserId { get; set; }
-        public AppUser? User { get; set; }
+        public AppUser?  User { get; set; }
         public int EmailId { get; set; }
         public Email? Email { get; set; }
         public int PhoneId { get; set; }

@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JobSearch.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JobSearch.DAL.Configuration
 {
-    internal class EmailConfiguration
+    public class EmailConfiguration : IEntityTypeConfiguration<Email>
     {
+        public void Configure(EntityTypeBuilder<Email> builder)
+        {
+            builder.Property(a=>a.EmailAddress)
+                .IsRequired()
+                .HasMaxLength(320);
+        }
     }
 }

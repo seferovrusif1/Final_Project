@@ -24,15 +24,23 @@ namespace JobSearch.DAL.Configuration
             builder.Property(a => a.Website)
                 .IsRequired()
                 .HasMaxLength(256);
+            
+            ///TODO:Delete no action arasdir
             builder.HasOne(x => x.User)
                   .WithMany(u => u.Companies)
-                  .HasForeignKey(x => x.UserId); 
+                  .HasForeignKey(x => x.UserId)
+                  .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.Email)
                   .WithMany(u => u.Companies)
-                  .HasForeignKey(x => x.EmailId);
+                  .HasForeignKey(x => x.EmailId)
+                  .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(x => x.Phone)
                   .WithMany(u => u.Companies)
-                  .HasForeignKey(x => x.PhoneId);
+                  .HasForeignKey(x => x.PhoneId)
+                  .OnDelete(DeleteBehavior.NoAction);
+
         }
 
     }
