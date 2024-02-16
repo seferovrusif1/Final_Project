@@ -2,6 +2,8 @@ using JobSearch.Core.Entities;
 using JobSearch.DAL.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using JobSearch.Business;
+
 
 namespace JobSearch.Api
 {
@@ -27,6 +29,11 @@ namespace JobSearch.Api
                 opt.SignIn.RequireConfirmedEmail = false;
                 opt.Password.RequireNonAlphanumeric = false;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<JobSearchContext>();
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

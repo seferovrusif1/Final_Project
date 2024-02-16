@@ -11,9 +11,6 @@ namespace JobSearch.Business.Services.Interfaces
     {
         ///TODO:dto ile deyisdir
         public IEnumerable<Company> GetAll();
-        public Task<Company> GetByIdAsync(int id);
         public Task CreateAsync(Company dto);
-        public Task RemoveAsync(int id);
-        public Task UpdateAsync(int id, Company dto);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Core.Entities.Common;
 using JobSearch.DAL.Contexts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace JobSearch.Business.Repositories.Implements
 {
@@ -13,15 +15,26 @@ namespace JobSearch.Business.Repositories.Implements
             _context = context;
         }
 
-        public Task CreateAsync(T data)
+        public async Task CreateAsync(T data)
         {
-            throw new NotImplementedException();
+            await Table.AddAsync(data);
         }
-
+        ///TODO: tekrar nezer yetir
+        public DbSet<T> Table => _context.Set<T>();
         public IQueryable<T> GetAll(bool noTracking = true, params string[] include)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query=Table.AsQueryable();
+            if (include != null && include.Length > 0)
+            {
+                foreach (var item in include)
+                {
+                    query = query.Include(item);
+                }
+            }
+            return noTracking ? query.AsNoTracking() : query;
         }
+
+     
 
         public Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include)
         {
