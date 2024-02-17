@@ -42,14 +42,6 @@ namespace JobSearch.Business.Services.Implements
             return data;
         }
 
-        Task<Company> ICompanyService.GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(int id, Company dto)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

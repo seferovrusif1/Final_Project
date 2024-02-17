@@ -20,6 +20,13 @@ namespace JobSearch.DAL.Configuration
             builder.Property(b => b.Surname)
                 .IsRequired()
                 .HasMaxLength(32);
+            builder.Property(b => b.BirthDate)
+                .IsRequired()
+                .HasColumnType("date");
+            /////TODO: bax burda yazdiqlarim elave edir yoxsa silib yerine yazir 
+            //builder.Property(b => b.UserName)
+            //    .IsRequired()
+            //    .HasMaxLength(64);
         }
     }
 }

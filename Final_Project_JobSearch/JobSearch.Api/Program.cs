@@ -23,14 +23,12 @@ namespace JobSearch.Api
             builder.Services.AddDbContext<JobSearchContext>(opt =>
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
-            }).AddIdentity<AppUser, IdentityRole>(opt =>
-            {
-                ///TODO: duzenle
-                opt.SignIn.RequireConfirmedEmail = false;
-                opt.Password.RequireNonAlphanumeric = false;
-            }).AddDefaultTokenProviders().AddEntityFrameworkStores<JobSearchContext>();
+            });
+            builder.Services.AddUserIdentity();
             builder.Services.AddRepositories();
             builder.Services.AddServices();
+            builder.Services.AddBusinessLayer();
+
 
 
 
