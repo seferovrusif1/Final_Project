@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobSearch.Core
+namespace JobSearch.DAL.Configuration
 {
-    public class Company:BaseEntity
+    internal class GenderConfiguration
     {
-        public string Name { get; set; }
     }
 }

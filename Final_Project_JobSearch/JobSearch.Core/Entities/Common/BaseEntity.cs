@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobSearch.Core.Common
+namespace JobSearch.Core.Entities.Common
 {
     public class BaseEntity
     {
