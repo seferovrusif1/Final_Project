@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobSearch.Core
+namespace JobSearch.Core.Enums
 {
-    public class Company:BaseEntity
+    public enum Roles
     {
-        public string Name { get; set; }
+        SuperAdmin,
+        Admin,
+        Moderator,
+        Member
     }
 }
