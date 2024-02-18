@@ -1,5 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using JobSearch.Business.DTOs.AuthDTOs;
+using JobSearch.Business.ExternalServices.Implements;
+using JobSearch.Business.ExternalServices.Interfaces;
 using JobSearch.Business.Profiles;
 using JobSearch.Business.Repositories.Implements;
 using JobSearch.Business.Repositories.Interfaces;
@@ -19,6 +21,7 @@ namespace JobSearch.Business
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICompanyService, CompanyService>();
             return services;
         }

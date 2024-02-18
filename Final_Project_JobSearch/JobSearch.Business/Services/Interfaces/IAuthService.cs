@@ -9,7 +9,7 @@ namespace JobSearch.Business.Services.Interfaces
 {
     public interface IAuthService
     {
-        public Task Login(LoginDTO dto);
+        public Task<TokenDTO> Login(LoginDTO dto);
         public Task CreateAsync(RegisterDTO dto);
 
     }
