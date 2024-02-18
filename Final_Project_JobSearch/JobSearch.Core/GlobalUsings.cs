@@ -1,1 +1,1 @@
-﻿global using JobSearch.Core.Entities.Common;
+﻿global using JobSearch.Core.Common;
