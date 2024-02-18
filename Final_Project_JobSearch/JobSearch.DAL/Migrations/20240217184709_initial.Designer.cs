@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobSearch.DAL.Migrations
 {
     [DbContext(typeof(JobSearchContext))]
-    [Migration("20240215180424_CreateUsersCompanyPhoneEmail")]
-    partial class CreateUsersCompanyPhoneEmail
+    [Migration("20240217184709_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Company");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Email", b =>
@@ -98,7 +98,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Emails");
+                    b.ToTable("Email");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
@@ -121,7 +121,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phones");
+                    b.ToTable("Phone");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -331,6 +331,9 @@ namespace JobSearch.DAL.Migrations
             modelBuilder.Entity("JobSearch.Core.Entities.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
