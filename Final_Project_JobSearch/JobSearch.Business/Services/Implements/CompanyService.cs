@@ -1,21 +1,31 @@
-﻿using JobSearch.Business.Repositories.Interfaces;
+﻿using AutoMapper;
+using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace JobSearch.Business.Services.Implements
 {
     public class CompanyService:ICompanyService
     {
         ICompanyRepository _repo { get; }
-        //IMapper _mapper { get; }
+        IHttpContextAccessor _contextAccessor { get; }
+        IMapper _mapper { get; }
+        readonly string userId;
 
-
-        public CompanyService(ICompanyRepository repo)
+        public CompanyService(ICompanyRepository repo, IMapper mapper, IHttpContextAccessor contextAccessor)
         {
             _repo = repo;
+            _mapper = mapper;
+            _contextAccessor = contextAccessor;
+            if (_contextAccessor.HttpContext.User.Claims.Any())
+            {
+                userId = _contextAccessor.HttpContext?.User?.Claims?.First(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? throw new NullReferenceException();
+            }
         }
 
-        ///TODO:DTO lari exceptionlari duzelt
+        ///TODO:DTO lar ,mapper, exceptionlari duzelt
         public async Task CreateAsync(Company dto)
         {
             await _repo.CreateAsync(dto);

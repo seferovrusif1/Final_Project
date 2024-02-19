@@ -16,17 +16,20 @@ namespace JobSearch.Business
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IPhoneRepository, PhoneRepository>();
+            services.AddScoped<IEmailRepository, EmailRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPhoneService, PhoneService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICompanyService, CompanyService>();
             return services;
         }
-        ///TODO: Add businnes layer for added mapper- dto 
-        ///
+        
         public static IServiceCollection AddBusinessLayer(this IServiceCollection services)
         {
             services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterDTOValidator>());

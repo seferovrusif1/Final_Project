@@ -96,7 +96,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Email");
+                    b.ToTable("Emails");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
@@ -119,7 +119,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

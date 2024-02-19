@@ -14,13 +14,13 @@ namespace JobSearch.Business.Repositories.Implements
         {
             _context = context;
         }
+        public DbSet<T> Table => _context.Set<T>();
 
         public async Task CreateAsync(T data)
         {
             await Table.AddAsync(data);
         }
         ///TODO: tekrar nezer yetir
-        public DbSet<T> Table => _context.Set<T>();
         public IQueryable<T> GetAll(bool noTracking = true, params string[] include)
         {
             IQueryable<T> query=Table.AsQueryable();
@@ -46,9 +46,9 @@ namespace JobSearch.Business.Repositories.Implements
             throw new NotImplementedException();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync(); 
         }
     }
 }
