@@ -3,6 +3,7 @@ using JobSearch.Core.Entities.Common;
 using JobSearch.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq.Expressions;
 
 namespace JobSearch.Business.Repositories.Implements
 {
@@ -34,7 +35,7 @@ namespace JobSearch.Business.Repositories.Implements
             return noTracking ? query.AsNoTracking() : query;
         }
 
-     
+      
 
         public Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include)
         {

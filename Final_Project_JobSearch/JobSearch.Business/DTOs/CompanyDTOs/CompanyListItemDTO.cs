@@ -12,8 +12,8 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
 
         public string Name { get; set; }
         public string About { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string EmailAddress { get; set; }
+        public string Number { get; set; }
         public string AuthorizedPerson { get; set; }
         ///TODO: belke ayri table a cixardim
         public string Website { get; set; }
@@ -28,12 +28,12 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
                 .MaximumLength(32);
             RuleFor(x => x.About)
                 .MaximumLength(2048);
-            RuleFor(x => x.Email)
+            RuleFor(x => x.EmailAddress)
                 .NotEmpty()
                 .NotNull()
                 .EmailAddress()
                 .MaximumLength(320);
-            RuleFor(x => x.Phone)
+            RuleFor(x => x.Number)
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(16)
@@ -49,3 +49,4 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
                 .MaximumLength(256);
         }
     }
+}

@@ -14,8 +14,11 @@ namespace JobSearch.Business.Profiles
         public CompanyMappingProfile()
         {
             CreateMap<CompanyCreateDTO, Company>();
-            CreateMap<Company, CompanyListItemDTO>();
-
+            CreateMap<Company, CompanyListItemDTO>()
+                  .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Phone.Number))
+                  .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.Email.EmailAddress));
         }
     }
+
 }
+    

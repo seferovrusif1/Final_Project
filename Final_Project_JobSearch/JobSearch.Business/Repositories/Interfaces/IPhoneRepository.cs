@@ -9,5 +9,7 @@ namespace JobSearch.Business.Repositories.Interfaces
 {
     public interface IPhoneRepository : IGenericRepository<Phone>
     {
+        int GetIdFromNumber(string data);
+
     }
 }

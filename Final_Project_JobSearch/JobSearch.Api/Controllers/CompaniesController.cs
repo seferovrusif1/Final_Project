@@ -1,4 +1,5 @@
-﻿using JobSearch.Business.Services.Interfaces;
+﻿using JobSearch.Business.DTOs.CompanyDTOs;
+using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,13 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             return Ok(_service.GetAll());
         }
         [HttpPost]
         ///TODO: dto ile deyis
-        public async Task<IActionResult> CreateCompanyAsync(Company dto)
+        public async Task<IActionResult> CreateCompanyAsync(CompanyCreateDTO dto)
         {
             await _service.CreateAsync(dto);
             return Ok();

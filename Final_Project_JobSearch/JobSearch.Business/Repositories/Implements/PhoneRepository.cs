@@ -1,11 +1,6 @@
 ﻿using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Core.Entities;
 using JobSearch.DAL.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.Business.Repositories.Implements
 {
@@ -14,5 +9,13 @@ namespace JobSearch.Business.Repositories.Implements
         public PhoneRepository(JobSearchContext context) : base(context)
         {
         }
+
+        public int GetIdFromNumber(string number)
+        {
+
+            var data = Table.SingleOrDefault(x => x.Number == number);
+            return data == null ? 0 : data.Id;
+        }
+
     }
 }
