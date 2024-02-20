@@ -35,7 +35,13 @@ namespace JobSearch.Business.Repositories.Implements
             return noTracking ? query.AsNoTracking() : query;
         }
 
-      
+
+        public async Task<bool> IsExistAsync(Expression<Func<T, bool>> expression)
+        {
+            return await Table.AnyAsync(expression);
+        }
+
+
 
         public Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include)
         {

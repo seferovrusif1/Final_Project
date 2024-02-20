@@ -14,5 +14,11 @@ namespace JobSearch.Business.Repositories.Implements
         public EmailRepository(JobSearchContext context) : base(context)
         {
         }
+        public int GetIdFromEmail(string Email)
+        {
+
+            var data = Table.SingleOrDefault(x => x.EmailAddress == Email);
+            return data == null ? 0 : data.Id;
+        }
     }
 }

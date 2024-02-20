@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobSearch.Business.Repositories.Interfaces
 {
-    public interface IEmailRepository:IGenericRepository<Email>
+    public interface IEducationRepository:IGenericRepository<Education>
     {
-        int GetIdFromEmail(string data);
-
     }
 }

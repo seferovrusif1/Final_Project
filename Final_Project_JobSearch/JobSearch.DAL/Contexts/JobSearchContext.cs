@@ -13,6 +13,8 @@ namespace JobSearch.DAL.Contexts
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Email> Emails { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<Education> Educations { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries<BaseEntity>();
