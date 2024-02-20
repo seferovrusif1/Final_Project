@@ -20,6 +20,8 @@ namespace JobSearch.Business
             services.AddScoped<IEmailRepository, EmailRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IEducationRepository, EducationRepository>();
+            services.AddScoped<IExperienceYearRepository, ExperienceYearRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
@@ -31,6 +33,8 @@ namespace JobSearch.Business
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IExperienceYearService, ExperienceYearService>();
+            services.AddScoped<ICityService, CityService>();
             return services;
         }
         
