@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobSearch.DAL.Migrations
 {
     [DbContext(typeof(JobSearchContext))]
-    [Migration("20240217184709_initial")]
-    partial class initial
+    [Migration("20240220143945_CreateEducation")]
+    partial class CreateEducation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,30 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("JobSearch.Core.Entities.Education", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Email", b =>
@@ -98,7 +121,30 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Email");
+                    b.ToTable("Emails");
+                });
+
+            modelBuilder.Entity("JobSearch.Core.Entities.Gender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genders");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
@@ -121,7 +167,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

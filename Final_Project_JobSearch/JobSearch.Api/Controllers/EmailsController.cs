@@ -1,7 +1,6 @@
-﻿using JobSearch.Business.DTOs.CompanyDTOs;
+﻿using JobSearch.Business.DTOs.EmailDTOs;
+using JobSearch.Business.DTOs.PhoneDTOs;
 using JobSearch.Business.Services.Interfaces;
-using JobSearch.Core.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,24 +8,23 @@ namespace JobSearch.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompaniesController : ControllerBase
+    public class EmailsController : ControllerBase
     {
-        ICompanyService _service { get; }
+        IEmailService _service { get; }
 
-        public CompaniesController(ICompanyService service)
+        public EmailsController(IEmailService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult Get()
         {
             return Ok(_service.GetAll());
         }
         [HttpPost]
-        [Authorize]
         ///TODO: dto ile deyis
-        public async Task<IActionResult> CreateCompanyAsync(CompanyCreateDTO dto)
+        public async Task<IActionResult> CreateEmailAsync(EmailCreateDTO dto)
         {
             await _service.CreateAsync(dto);
             return Ok();

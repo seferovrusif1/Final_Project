@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobSearch.DAL.Migrations
 {
-    public partial class initial : Migration
+    public partial class CompanyPhoneEmailappuser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,7 +53,7 @@ namespace JobSearch.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Email",
+                name: "Emails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -64,11 +64,11 @@ namespace JobSearch.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Email", x => x.Id);
+                    table.PrimaryKey("PK_Emails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Phone",
+                name: "Phones",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -79,7 +79,7 @@ namespace JobSearch.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Phone", x => x.Id);
+                    table.PrimaryKey("PK_Phones", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,7 +189,7 @@ namespace JobSearch.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "Companies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -207,23 +207,23 @@ namespace JobSearch.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Company_AspNetUsers_UserId",
+                        name: "FK_Companies_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Company_Email_EmailId",
+                        name: "FK_Companies_Emails_EmailId",
                         column: x => x.EmailId,
-                        principalTable: "Email",
+                        principalTable: "Emails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Company_Phone_PhoneId",
+                        name: "FK_Companies_Phones_PhoneId",
                         column: x => x.PhoneId,
-                        principalTable: "Phone",
+                        principalTable: "Phones",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -268,18 +268,18 @@ namespace JobSearch.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Company_EmailId",
-                table: "Company",
+                name: "IX_Companies_EmailId",
+                table: "Companies",
                 column: "EmailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Company_PhoneId",
-                table: "Company",
+                name: "IX_Companies_PhoneId",
+                table: "Companies",
                 column: "PhoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Company_UserId",
-                table: "Company",
+                name: "IX_Companies_UserId",
+                table: "Companies",
                 column: "UserId");
         }
 
@@ -301,7 +301,7 @@ namespace JobSearch.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -310,10 +310,10 @@ namespace JobSearch.DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Email");
+                name: "Emails");
 
             migrationBuilder.DropTable(
-                name: "Phone");
+                name: "Phones");
         }
     }
 }

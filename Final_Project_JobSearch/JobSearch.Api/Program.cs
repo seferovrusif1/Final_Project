@@ -55,7 +55,7 @@ namespace JobSearch.Api
             builder.Services.AddServices();
             builder.Services.AddBusinessLayer();
             builder.Services.AddAuthent(jwt);
-
+            builder.Services.AddHttpContextAccessor();
 
 
             var app = builder.Build();

@@ -1,4 +1,5 @@
-﻿using JobSearch.Business.DTOs.PhoneDTOs;
+﻿using JobSearch.Business.DTOs.EmailDTOs;
+using JobSearch.Business.DTOs.GenderDTOs;
 using JobSearch.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace JobSearch.Business.Services.Interfaces
 {
-    public interface IPhoneService
+    public interface IGenderService
     {
         ///TODO:dto ile deyisdirc   
-        public IEnumerable<PhoneListItemDTO> GetAll();
-        public Task CreateAsync(PhoneCreateDTO dto);
+        public IEnumerable<GenderListItemDTO> GetAll();
+        public Task CreateAsync(GenderCreateDTO dto);
     }
 }

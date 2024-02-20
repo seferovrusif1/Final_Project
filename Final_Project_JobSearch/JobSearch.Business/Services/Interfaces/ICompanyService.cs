@@ -1,16 +1,11 @@
-﻿using JobSearch.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JobSearch.Business.DTOs.CompanyDTOs;
 
 namespace JobSearch.Business.Services.Interfaces
 {
     public interface ICompanyService
     {
         ///TODO:dto ile deyisdir
-        public IEnumerable<Company> GetAll();
-        public Task CreateAsync(Company dto);
+        public IEnumerable<CompanyListItemDTO> GetAll();
+        public Task CreateAsync(CompanyCreateDTO dto);
     }
 }

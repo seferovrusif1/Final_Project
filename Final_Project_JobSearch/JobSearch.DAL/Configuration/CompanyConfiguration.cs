@@ -23,6 +23,7 @@ namespace JobSearch.DAL.Configuration
                .HasMaxLength(64);
             builder.Property(a => a.Website)
                 .IsRequired()
+                ///TODO: belke 2048 e deisdim (dto lari unutma)
                 .HasMaxLength(256);
             
             ///TODO:Delete no action arasdir
