@@ -17,6 +17,9 @@ namespace JobSearch.DAL.Contexts
         public DbSet<Education> Educations { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<ExperienceYear> ExperienceYears { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

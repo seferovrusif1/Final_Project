@@ -19,6 +19,8 @@ namespace JobSearch.Business.Services.Implements
 
         public async Task CreateAsync(EmailCreateDTO dto)
         {
+            if (await _repo.IsExistAsync(r => r.EmailAddress.ToLower() == dto.EmailAddress.ToLower()))
+                throw new Exception("Already exist");
             await _repo.CreateAsync(_mapper.Map<Email>(dto));
             await _repo.SaveAsync();
         }
