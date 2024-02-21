@@ -26,6 +26,8 @@ namespace JobSearch.Business
             services.AddScoped<ISalaryRepository, SalaryRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
+            services.AddScoped<ITypeOfVacancyRepository, TypeOfVacancyRepository>();
+            services.AddScoped<IWorkTypeRepository, WorkTypeRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
@@ -42,6 +44,8 @@ namespace JobSearch.Business
             services.AddScoped<ISalaryService, SalaryService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<ITypeOfvacancyService, TypeOfVacancyService>();
+            services.AddScoped<IWorkTypeService, WorkTypeService>();
             
             return services;
         }

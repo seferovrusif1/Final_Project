@@ -21,6 +21,9 @@ namespace JobSearch.DAL.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<SocialMediaCompany> SocialMediasCompanies { get; set; }
+        public DbSet<WorkType> WorkTypes { get; set; }
+        public DbSet<TypeOfVacancy> TypesOfVacancy { get; set; }
+        public DbSet<Vacancy> Vacancies{ get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

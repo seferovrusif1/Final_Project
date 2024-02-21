@@ -13,8 +13,8 @@
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public string Position { get; set; }
-        public int MinSalaryId { get; set; }
-        public Salary? MinSalary { get; set; }
+        //public int MinSalaryId { get; set; }
+        //public Salary? MinSalary { get; set; }
         public int MaxSalaryId { get; set; }
         public Salary? MaxSalary { get; set; }
         public string AboutWork { get; set; }

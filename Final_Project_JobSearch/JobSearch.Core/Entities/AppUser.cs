@@ -10,6 +10,6 @@ namespace JobSearch.Core.Entities
 
         //public IEnumerable<JobSeeker>? Seekers { get; set; }
         public IEnumerable<Company>? Companies { get; set; }
-        //public IEnumerable<Vacancy>? Vacancies { get; set; }
+        public IEnumerable<Vacancy>? Vacancies { get; set; }
     }
 }

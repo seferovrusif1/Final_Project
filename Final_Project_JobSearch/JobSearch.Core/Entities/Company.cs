@@ -15,6 +15,7 @@
         public string Website { get; set; }
         public bool IsConfirmed { get; set; }
         public IEnumerable<SocialMediaCompany>? SocialMediaCompany { get; set; }
+        public IEnumerable<Vacancy>? Vacancies { get; set; }
 
     }
 }
