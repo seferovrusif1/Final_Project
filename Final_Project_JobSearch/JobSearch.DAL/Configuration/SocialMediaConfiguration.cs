@@ -22,6 +22,8 @@ namespace JobSearch.DAL.Configuration
             builder.Property(a => a.Icon)
                 .IsRequired()
                 .HasMaxLength(128);
+
+
         }
 
     }

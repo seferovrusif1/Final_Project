@@ -20,6 +20,7 @@ namespace JobSearch.DAL.Contexts
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<SocialMediaCompany> SocialMediasCompanies { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

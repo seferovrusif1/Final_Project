@@ -7,6 +7,7 @@ using JobSearch.Business.Repositories.Implements;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Implements;
 using JobSearch.Business.Services.Interfaces;
+using JobSearch.Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobSearch.Business
@@ -24,6 +25,7 @@ namespace JobSearch.Business
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ISalaryRepository, SalaryRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
@@ -39,6 +41,8 @@ namespace JobSearch.Business
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ISalaryService, SalaryService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISocialMediaService, SocialMediaService>();
+            
             return services;
         }
         
