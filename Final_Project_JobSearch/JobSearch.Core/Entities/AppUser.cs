@@ -8,8 +8,8 @@ namespace JobSearch.Core.Entities
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }
 
-        //public IEnumerable<JobSeeker>? Seekers { get; set; }
+        public IEnumerable<JobSeeker>? Seekers { get; set; }
         public IEnumerable<Company>? Companies { get; set; }
-        //public IEnumerable<Vacancy>? Vacancies { get; set; }
+        public IEnumerable<Vacancy>? Vacancies { get; set; }
     }
 }

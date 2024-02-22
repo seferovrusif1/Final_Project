@@ -1,11 +1,6 @@
 ﻿using JobSearch.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.DAL.Configuration
 {
@@ -41,6 +36,10 @@ namespace JobSearch.DAL.Configuration
                   .WithMany(u => u.Companies)
                   .HasForeignKey(x => x.PhoneId)
                   .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasMany(x=>x.Vacancies)
+            //    .WithOne(y=>y.Company)
+            //    .HasForeignKey(x=>x.CompanyId)
+            //      .OnDelete(DeleteBehavior.NoAction);
 
         }
 

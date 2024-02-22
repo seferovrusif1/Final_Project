@@ -15,14 +15,13 @@
         public string CVImgUrl { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-        public int MinSalaryId { get; set; }
-        public Salary? MinSalary { get; set; }
+
         public int GenderId { get; set; }
         public Gender? Gender { get; set; }
         public int EducationId { get; set; }
-        public Education? EducationDegree { get; set; }
+        public Education? Education { get; set; }
         public string EducationDetail { get; set; }
-        public int ExperienceId { get; set; }
+        public int ExperienceYearId { get; set; }
         public ExperienceYear? ExperienceYear { get; set; }
         public string ExperienceDetail { get; set; }
         public string Position{ get; set; }
@@ -35,5 +34,6 @@
         public DateTime BirthDate { get; set; }
         public bool IsPremium{ get; set; }
         public bool IsConfirmed { get; set; }
+        public IEnumerable<SocialMediaJobSeeker>? SocialMediaJobSeekers { get; set; }
     }
 }

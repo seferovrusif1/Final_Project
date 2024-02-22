@@ -11,9 +11,9 @@ namespace JobSearch.Business.Repositories.Interfaces
         Task CreateAsync(T data);
         IQueryable<T> GetAll(bool noTracking = true, params string[] include);
         Task<bool> IsExistAsync(Expression<Func<T, bool>> expression);
-
-
         Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include);
+
+
         void Remove(T data);
         Task SaveAsync();
     }

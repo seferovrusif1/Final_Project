@@ -8,7 +8,7 @@ namespace JobSearch.Api.Helpers
 {
     public static class SeedData
     {
-        ///TODO:Exceptionlari duzelt nezer yetir koda ve bu kodun bir defe islemesi variantini arassdir
+        ///TODO:tekrar nezer yetir koda ve bu kodun bir defe islemesi variantini arassdir
         public static IApplicationBuilder UseSeedData(this WebApplication app)
         {
             app.Use(async (context, next) =>

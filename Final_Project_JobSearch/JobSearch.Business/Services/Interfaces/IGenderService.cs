@@ -11,7 +11,6 @@ namespace JobSearch.Business.Services.Interfaces
 {
     public interface IGenderService
     {
-        ///TODO:dto ile deyisdirc   
         public IEnumerable<GenderListItemDTO> GetAll();
         public Task CreateAsync(GenderCreateDTO dto);
     }

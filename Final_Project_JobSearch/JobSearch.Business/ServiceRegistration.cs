@@ -7,6 +7,7 @@ using JobSearch.Business.Repositories.Implements;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Implements;
 using JobSearch.Business.Services.Interfaces;
+using JobSearch.Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobSearch.Business
@@ -20,6 +21,17 @@ namespace JobSearch.Business
             services.AddScoped<IEmailRepository, EmailRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IEducationRepository, EducationRepository>();
+            services.AddScoped<IExperienceYearRepository, ExperienceYearRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ISalaryRepository, SalaryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
+            services.AddScoped<ITypeOfVacancyRepository, TypeOfVacancyRepository>();
+            services.AddScoped<IWorkTypeRepository, WorkTypeRepository>();
+            services.AddScoped<IVacancyRepository, VacancyRepository>();
+            services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
+            services.AddScoped<ISMJobSeekerRepository, SMJobSeekerRepository>();
+            services.AddScoped<ISMCompanyRepository, SMCompanyRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
@@ -31,6 +43,17 @@ namespace JobSearch.Business
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IExperienceYearService, ExperienceYearService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ISalaryService, SalaryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<ITypeOfvacancyService, TypeOfVacancyService>();
+            services.AddScoped<IWorkTypeService, WorkTypeService>();
+            services.AddScoped<IVacancyService, VacancyService>();
+            services.AddScoped<IJobSeekerService, JobSeekerService>();
+            services.AddScoped<ISMJobSeekerService, SMJobSeekerService>();
+            services.AddScoped<ISMCompanyService, SMCompanyService>();
             return services;
         }
         

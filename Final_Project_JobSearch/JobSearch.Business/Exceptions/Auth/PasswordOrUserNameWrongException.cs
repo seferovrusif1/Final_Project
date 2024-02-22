@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace JobSearch.Business.Exceptions.AppUser
 {
-    public class PasswordOrUserNameWrongException : Exception
+    public class PasswordOrUserNameWrongException : Exception, IBaseException
     {
-        public PasswordOrUserNameWrongException():base("UserName Or Password is wrong")
+        public int StatusCode => StatusCodes.Status400BadRequest;
+        public string ErrorMessage { get; set; }
+
+        public PasswordOrUserNameWrongException()
         {
+            ErrorMessage = "Username or password is wrong";
         }
 
-        public PasswordOrUserNameWrongException(string? message) : base(message)
+        public PasswordOrUserNameWrongException(string? message)
         {
+            ErrorMessage = message;
         }
+
     }
+   
 }
