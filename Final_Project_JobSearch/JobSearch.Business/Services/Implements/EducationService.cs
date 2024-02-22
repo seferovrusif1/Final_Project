@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.DTOs.EmailDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -24,9 +25,9 @@ namespace JobSearch.Business.Services.Implements
         }
 
         public async Task CreateAsync(EducationCreateDTO dto)
-        {    ///TODO:Exception duzelt
+        {    
             if (await _repo.IsExistAsync(r => r.Degree.ToLower() == dto.Degree.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Education>();
             await _repo.CreateAsync(_mapper.Map<Education>(dto));
             await _repo.SaveAsync();
         }

@@ -219,6 +219,119 @@ namespace JobSearch.DAL.Migrations
                     b.ToTable("Genders");
                 });
 
+            modelBuilder.Entity("JobSearch.Core.Entities.JobSeeker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AdditionalInformation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CVImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EducationDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EducationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmailId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExperienceDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExperienceYearId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPremium")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageSkills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("EducationId");
+
+                    b.HasIndex("EmailId");
+
+                    b.HasIndex("ExperienceYearId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("PhoneId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Seekers");
+                });
+
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
                 {
                     b.Property<int>("Id")
@@ -307,6 +420,12 @@ namespace JobSearch.DAL.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("SocialMediaId")
                         .HasColumnType("int");
 
@@ -321,6 +440,39 @@ namespace JobSearch.DAL.Migrations
                     b.HasIndex("SocialMediaId");
 
                     b.ToTable("SocialMediasCompanies");
+                });
+
+            modelBuilder.Entity("JobSearch.Core.Entities.SocialMediaJobSeeker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocialMediaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobSeekerId");
+
+                    b.HasIndex("SocialMediaId");
+
+                    b.ToTable("SocialMediasJobSeeker");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.TypeOfVacancy", b =>
@@ -368,28 +520,19 @@ namespace JobSearch.DAL.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DeadLine")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EducationDegreeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EdudcationId")
+                    b.Property<int>("EducationId")
                         .HasColumnType("int");
 
                     b.Property<int>("EmailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExperienceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceYearId")
+                    b.Property<int>("ExperienceYearId")
                         .HasColumnType("int");
 
                     b.Property<int>("GenderId")
@@ -410,10 +553,10 @@ namespace JobSearch.DAL.Migrations
                     b.Property<int>("MaxSalaryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaxYas")
+                    b.Property<int?>("MaxYas")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinYas")
+                    b.Property<int?>("MinYas")
                         .HasColumnType("int");
 
                     b.Property<int>("PhoneId")
@@ -447,9 +590,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("EducationDegreeId");
+                    b.HasIndex("EducationId");
 
                     b.HasIndex("EmailId");
 
@@ -751,6 +892,73 @@ namespace JobSearch.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("JobSearch.Core.Entities.JobSeeker", b =>
+                {
+                    b.HasOne("JobSearch.Core.Entities.Category", "Category")
+                        .WithMany("Seekers")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.City", "City")
+                        .WithMany("Seekers")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.Education", "Education")
+                        .WithMany("Seekers")
+                        .HasForeignKey("EducationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.Email", "Email")
+                        .WithMany("Seekers")
+                        .HasForeignKey("EmailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.ExperienceYear", "ExperienceYear")
+                        .WithMany("Seekers")
+                        .HasForeignKey("ExperienceYearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.Gender", "Gender")
+                        .WithMany("Seekers")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.Phone", "Phone")
+                        .WithMany("Seekers")
+                        .HasForeignKey("PhoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.AppUser", "User")
+                        .WithMany("Seekers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("City");
+
+                    b.Navigation("Education");
+
+                    b.Navigation("Email");
+
+                    b.Navigation("ExperienceYear");
+
+                    b.Navigation("Gender");
+
+                    b.Navigation("Phone");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JobSearch.Core.Entities.SocialMediaCompany", b =>
                 {
                     b.HasOne("JobSearch.Core.Entities.Company", "Company")
@@ -770,6 +978,25 @@ namespace JobSearch.DAL.Migrations
                     b.Navigation("SocialMedia");
                 });
 
+            modelBuilder.Entity("JobSearch.Core.Entities.SocialMediaJobSeeker", b =>
+                {
+                    b.HasOne("JobSearch.Core.Entities.JobSeeker", "JobSeeker")
+                        .WithMany("SocialMediaJobSeekers")
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSearch.Core.Entities.SocialMedia", "SocialMedia")
+                        .WithMany("SocialMediaJobSeekers")
+                        .HasForeignKey("SocialMediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker");
+
+                    b.Navigation("SocialMedia");
+                });
+
             modelBuilder.Entity("JobSearch.Core.Entities.Vacancy", b =>
                 {
                     b.HasOne("JobSearch.Core.Entities.Category", "Category")
@@ -784,15 +1011,11 @@ namespace JobSearch.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JobSearch.Core.Entities.Company", "Company")
+                    b.HasOne("JobSearch.Core.Entities.Education", "Education")
                         .WithMany("Vacancies")
-                        .HasForeignKey("CompanyId")
+                        .HasForeignKey("EducationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("JobSearch.Core.Entities.Education", "EducationDegree")
-                        .WithMany("Vacancies")
-                        .HasForeignKey("EducationDegreeId");
 
                     b.HasOne("JobSearch.Core.Entities.Email", "Email")
                         .WithMany("Vacancies")
@@ -802,7 +1025,9 @@ namespace JobSearch.DAL.Migrations
 
                     b.HasOne("JobSearch.Core.Entities.ExperienceYear", "ExperienceYear")
                         .WithMany("Vacancies")
-                        .HasForeignKey("ExperienceYearId");
+                        .HasForeignKey("ExperienceYearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JobSearch.Core.Entities.Gender", "Gender")
                         .WithMany("Vacancies")
@@ -844,9 +1069,7 @@ namespace JobSearch.DAL.Migrations
 
                     b.Navigation("City");
 
-                    b.Navigation("Company");
-
-                    b.Navigation("EducationDegree");
+                    b.Navigation("Education");
 
                     b.Navigation("Email");
 
@@ -920,23 +1143,27 @@ namespace JobSearch.DAL.Migrations
                 {
                     b.Navigation("Childs");
 
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.City", b =>
                 {
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Company", b =>
                 {
                     b.Navigation("SocialMediaCompany");
-
-                    b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Education", b =>
                 {
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
                 });
 
@@ -944,22 +1171,35 @@ namespace JobSearch.DAL.Migrations
                 {
                     b.Navigation("Companies");
 
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.ExperienceYear", b =>
                 {
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Gender", b =>
                 {
+                    b.Navigation("Seekers");
+
                     b.Navigation("Vacancies");
+                });
+
+            modelBuilder.Entity("JobSearch.Core.Entities.JobSeeker", b =>
+                {
+                    b.Navigation("SocialMediaJobSeekers");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
                 {
                     b.Navigation("Companies");
+
+                    b.Navigation("Seekers");
 
                     b.Navigation("Vacancies");
                 });
@@ -972,6 +1212,8 @@ namespace JobSearch.DAL.Migrations
             modelBuilder.Entity("JobSearch.Core.Entities.SocialMedia", b =>
                 {
                     b.Navigation("SocialMediaCompanies");
+
+                    b.Navigation("SocialMediaJobSeekers");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.TypeOfVacancy", b =>
@@ -987,6 +1229,8 @@ namespace JobSearch.DAL.Migrations
             modelBuilder.Entity("JobSearch.Core.Entities.AppUser", b =>
                 {
                     b.Navigation("Companies");
+
+                    b.Navigation("Seekers");
 
                     b.Navigation("Vacancies");
                 });

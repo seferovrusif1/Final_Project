@@ -28,6 +28,10 @@ namespace JobSearch.Business
             services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
             services.AddScoped<ITypeOfVacancyRepository, TypeOfVacancyRepository>();
             services.AddScoped<IWorkTypeRepository, WorkTypeRepository>();
+            services.AddScoped<IVacancyRepository, VacancyRepository>();
+            services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
+            services.AddScoped<ISMJobSeekerRepository, SMJobSeekerRepository>();
+            services.AddScoped<ISMCompanyRepository, SMCompanyRepository>();
             return services;
         }
         public static IServiceCollection AddServices(this IServiceCollection services)
@@ -46,7 +50,10 @@ namespace JobSearch.Business
             services.AddScoped<ISocialMediaService, SocialMediaService>();
             services.AddScoped<ITypeOfvacancyService, TypeOfVacancyService>();
             services.AddScoped<IWorkTypeService, WorkTypeService>();
-            
+            services.AddScoped<IVacancyService, VacancyService>();
+            services.AddScoped<IJobSeekerService, JobSeekerService>();
+            services.AddScoped<ISMJobSeekerService, SMJobSeekerService>();
+            services.AddScoped<ISMCompanyService, SMCompanyService>();
             return services;
         }
         

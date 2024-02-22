@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.SalaryDTOs;
 using JobSearch.Business.DTOs.SocialMediaDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -25,7 +26,8 @@ namespace JobSearch.Business.Services.Implements
         public async Task CreateAsync(SocialMediaCreateDTO dto)
         {
             if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()) || await _repo.IsExistAsync(r => r.MainLink.ToLower() == dto.MainLink.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<SocialMedia>();
+
             await _repo.CreateAsync(_mapper.Map<SocialMedia>(dto));
             await _repo.SaveAsync();
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.ExperianceYearDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -18,9 +19,10 @@ namespace JobSearch.Business.Services.Implements
         }
 
         public async Task CreateAsync(ExperienceYearCreateDTO dto)
-        {    ///TODO:Exception duzelt
+        {  
             if (await _repo.IsExistAsync(r => r.ExpYear.ToLower() == dto.ExpYear.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<ExperienceYear>();
+
             await _repo.CreateAsync(_mapper.Map<ExperienceYear>(dto));
             await _repo.SaveAsync();
         }

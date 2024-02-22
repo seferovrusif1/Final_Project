@@ -8,8 +8,8 @@ namespace JobSearch.Business.Profiles
     {
         public WorkTypeMappingProfile()
     {
-        CreateMap<WorkTypeCreateDTO, SocialMedia>();
-        CreateMap<SocialMedia, WorkTypeListItemDTO>();
+        CreateMap<WorkTypeCreateDTO, WorkType>();
+        CreateMap<WorkType, WorkTypeListItemDTO>();
     }
 }
 }

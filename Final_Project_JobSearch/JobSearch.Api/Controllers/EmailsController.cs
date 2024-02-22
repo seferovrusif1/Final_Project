@@ -23,7 +23,6 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
         [HttpPost]
-        ///TODO: dto ile deyis
         public async Task<IActionResult> CreateEmailAsync(EmailCreateDTO dto)
         {
             await _service.CreateAsync(dto);

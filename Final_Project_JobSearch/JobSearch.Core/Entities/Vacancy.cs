@@ -8,8 +8,8 @@
         public Email? Email { get; set; }
         public int PhoneId { get; set; }
         public Phone? Phone { get; set; }
-        public int CompanyId { get; set; }
-        public Company? Company { get; set; }
+        //public int CompanyId { get; set; }
+        //public Company? Company { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public string Position { get; set; }
@@ -19,13 +19,13 @@
         public Salary? MaxSalary { get; set; }
         public string AboutWork { get; set; }
         public string Requirements { get; set; }
-        public int MaxYas { get; set; }
-        public int MinYas { get; set; }
+        public int? MaxYas { get; set; }
+        public int? MinYas { get; set; }
         public int GenderId { get; set; }
         public Gender? Gender { get; set; }
-        public int EdudcationId { get; set; }
-        public Education? EducationDegree { get; set; }
-        public int ExperienceId { get; set; }
+        public int EducationId { get; set; }
+        public Education? Education { get; set; }
+        public int ExperienceYearId { get; set; }
         public ExperienceYear? ExperienceYear { get; set; }
         public int CityId { get; set; }
         public City? City { get; set; }

@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.CompanyDTOs;
+using JobSearch.Business.DTOs.SMCompanyDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -31,12 +34,11 @@ namespace JobSearch.Business.Services.Implements
             _emailRepo = emailRepo;
         }
 
-        ///TODO:DTO lar ,mapper, exceptionlari duzelt
+     
         public async Task CreateAsync(CompanyCreateDTO dto)
         {
-            ///TODO:Exception duzelt
             if (await _repo.IsExistAsync(r => r.Name.ToLower() == dto.Name.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Company>();
             Company data = new Company
             {
                 About = dto.About,
@@ -73,23 +75,34 @@ namespace JobSearch.Business.Services.Implements
             return  _mapper.Map<IEnumerable<CompanyListItemDTO>>(data);
         }
 
-     
-        //public async Task RemoveAsync(int id)
-        //{
-        //    var data = await _checkId(id);
-        //    _repo.Remove(data);
-        //    await _repo.SaveAsync();
-        //}
+        public async Task Delete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Company>();
+            if (data.UserId != userId) throw new Exception("User has no access");
+            _repo.Remove(data);
+            await _repo.SaveAsync();
+        }
 
-      
-        //async Task<Company> _checkId(int id, bool isTrack = false)
-        //{
-        //    if (id <= 0) throw new ArgumentException();
-        //    var data = await _repo.GetByIdAsync(id, isTrack);
-        //    if (data == null) throw new Exception();
-        //    return data;
-        //}
+        public async Task SoftDelete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Company>();
+            if (data.UserId != userId) throw new Exception("User has no access");
+            data.IsDleted = true;
+            await _repo.SaveAsync();
 
-     
+        }
+
+        public async Task ReverseSoftDelete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Company>();
+            if (data.UserId != userId) throw new Exception("User has no access");
+            data.IsDleted = false;
+            await _repo.SaveAsync();
+
+        }
+
     }
 }

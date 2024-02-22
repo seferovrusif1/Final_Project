@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.PhoneDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Profiles;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
@@ -27,7 +28,7 @@ namespace JobSearch.Business.Services.Implements
         public async Task CreateAsync(PhoneCreateDTO dto)
         {
             if (await _repo.IsExistAsync(r => r.Number.ToLower() == dto.Number.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Phone>();
             await _repo.CreateAsync(_mapper.Map<Phone>(dto));
             await _repo.SaveAsync();
 

@@ -44,8 +44,7 @@ namespace JobSearch.Business.Services.Implements
                 {
                     sb.Append(item.Description + " ");
                 }
-                //TODO : Custom Exception
-                throw new Exception(sb.ToString().TrimEnd());
+                throw new AppUserRegisterFailedException(sb.ToString().TrimEnd());
             }
         }
 

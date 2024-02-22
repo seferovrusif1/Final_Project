@@ -20,6 +20,10 @@ namespace JobSearch.DAL.Configuration
                  .WithMany(u => u.SocialMediaCompanies)
                  .HasForeignKey(x => x.SocialMediaId)
                  .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Company)
+                 .WithMany(u => u.SocialMediaCompany)
+                 .HasForeignKey(x => x.CompanyId)
+                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -13,7 +13,6 @@ namespace JobSearch.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            ///TODO:relation-lari qur
             builder.Property(b => b.Name)
                 .IsRequired()
                 .HasMaxLength(32);

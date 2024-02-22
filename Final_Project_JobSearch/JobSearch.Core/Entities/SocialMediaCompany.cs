@@ -1,8 +1,7 @@
 ﻿namespace JobSearch.Core.Entities
 {
-    public class SocialMediaCompany
+    public class SocialMediaCompany:BaseEntity
     { 
-        public int Id { get; set; }
         public int SocialMediaId { get; set; }
         public SocialMedia SocialMedia { get; set; }
         public int CompanyId { get; set; }

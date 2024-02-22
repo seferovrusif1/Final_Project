@@ -43,14 +43,22 @@ namespace JobSearch.Business.Repositories.Implements
 
 
 
-        public Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include)
+        public async Task<T> GetByIdAsync(int id, bool noTracking = true, params string[] include)
         {
-            throw new NotImplementedException();
-        }
+            IQueryable<T> query = Table.AsQueryable();
+            if (include != null && include.Length > 0)
+            {
+                foreach (var item in include)
+                {
+                    query = query.Include(item);
+                }
+            }
+            return noTracking ? await query.AsNoTracking().SingleOrDefaultAsync(t => t.Id == id) : await query.SingleOrDefaultAsync(t => t.Id == id);
+        }   
 
         public void Remove(T data)
         {
-            throw new NotImplementedException();
+            Table.Remove(data);
         }
 
         public async Task SaveAsync()

@@ -15,7 +15,6 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
         public string EmailAddress { get; set; }
         public string Number { get; set; }
         public string AuthorizedPerson { get; set; }
-        ///TODO: belke ayri table a cixardim
         public string Website { get; set; }
     }
     public class CompanyListItemDTOValidator : AbstractValidator<CompanyListItemDTO>

@@ -40,18 +40,21 @@ namespace JobSearch.DAL.Configuration
                  .WithMany(u => u.Vacancies)
                  .HasForeignKey(x => x.UserId)
                  .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(x => x.Email)
                  .WithMany(u => u.Vacancies)
                  .HasForeignKey(x => x.EmailId)
                  .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(x => x.Phone)
                  .WithMany(u => u.Vacancies)
                  .HasForeignKey(x => x.PhoneId)
-                 .OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(x => x.Company)
-                 .WithMany(u => u.Vacancies)
-                 .HasForeignKey(x => x.CompanyId)
                  .OnDelete(DeleteBehavior.NoAction);
+
+            //builder.HasOne(x => x.Company)
+            //     .WithMany(u => u.Vacancies)
+            //     .HasForeignKey(x => x.CompanyId);
+
             builder.HasOne(x => x.Category)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.CategoryId)
@@ -60,30 +63,37 @@ namespace JobSearch.DAL.Configuration
             //   .WithMany(u => u.Vacancies)
             //   .HasForeignKey(x => x.MinSalaryId)
             //   .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.MaxSalary)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.MaxSalaryId)
                .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.Gender)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.GenderId)
                .OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.EducationDegree)
+            
+            builder.HasOne(x => x.Education)
                .WithMany(u => u.Vacancies)
-               .HasForeignKey(x => x.EdudcationId)
+               .HasForeignKey(x => x.EducationId)
                .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.ExperienceYear)
                .WithMany(u => u.Vacancies)
-               .HasForeignKey(x => x.ExperienceId)
+               .HasForeignKey(x => x.ExperienceYearId)
                .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.City)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.CityId)
                .OnDelete(DeleteBehavior.NoAction);
+            
             builder.HasOne(x => x.TypeOfVacancy)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.TypeOfVacancyId)
                .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(x => x.WorkType)
                .WithMany(u => u.Vacancies)
                .HasForeignKey(x => x.WorkTypeId)

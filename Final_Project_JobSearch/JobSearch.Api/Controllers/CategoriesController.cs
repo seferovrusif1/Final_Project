@@ -22,7 +22,6 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
         [HttpPost]
-        ///TODO: dto ile deyis
         public async Task<IActionResult> CreateCategoryAsync(CategoryCreateDTO dto)
         {
             await _service.CreateAsync(dto);

@@ -72,6 +72,7 @@ namespace JobSearch.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseCustomExceptionHandler();
 
             app.UseAuthentication();
             app.UseAuthorization();

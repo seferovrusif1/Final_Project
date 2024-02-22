@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.CategoryDTOs;
 using JobSearch.Business.DTOs.EmailDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -26,7 +27,8 @@ namespace JobSearch.Business.Services.Implements
         public async Task CreateAsync(CategoryCreateDTO dto)
         {
             if (await _repo.IsExistAsync(r => r.Name.ToLower() == dto.Name.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Category>();
+
             ///TODO:getbyid ile parent id olub olmadigini tap
             await _repo.CreateAsync(_mapper.Map<Category>(dto));
             await _repo.SaveAsync();

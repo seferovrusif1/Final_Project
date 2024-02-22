@@ -10,7 +10,6 @@ namespace JobSearch.Business.Services.Interfaces
 {
     public interface IPhoneService
     {
-        ///TODO:dto ile deyisdirc   
         public IEnumerable<PhoneListItemDTO> GetAll();
         public Task CreateAsync(PhoneCreateDTO dto);
     }

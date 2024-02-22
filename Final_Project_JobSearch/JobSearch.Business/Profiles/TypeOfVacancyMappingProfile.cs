@@ -15,8 +15,8 @@ namespace JobSearch.Business.Profiles
     {
         public TypeOfVacancyMappingProfile()
         {
-            CreateMap<TypeOfVacancyCreateDTO, SocialMedia>();
-            CreateMap<SocialMedia, TypeOfVacancyListItemDTO>();
+            CreateMap<TypeOfVacancyCreateDTO, TypeOfVacancy>();
+            CreateMap<TypeOfVacancy, TypeOfVacancyListItemDTO>();
         }
     }
 }

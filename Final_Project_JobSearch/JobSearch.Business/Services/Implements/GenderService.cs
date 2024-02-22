@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.EmailDTOs;
 using JobSearch.Business.DTOs.GenderDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -21,12 +22,10 @@ namespace JobSearch.Business.Services.Implements
             _mapper = mapper;
             _repo = repo;
         }
-        ///TODO:dto ile deyis
         public async Task CreateAsync(GenderCreateDTO dto)
         {
-            ///TODO:Exception duzelt
             if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Gender>();
             await _repo.CreateAsync(_mapper.Map<Gender>(dto));
             await _repo.SaveAsync();
         }

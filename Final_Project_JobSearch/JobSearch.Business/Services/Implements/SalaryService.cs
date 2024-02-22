@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.PhoneDTOs;
 using JobSearch.Business.DTOs.SalaryDTOs;
+using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -25,7 +26,7 @@ namespace JobSearch.Business.Services.Implements
         public async Task CreateAsync(SalaryCreateDTO dto)
         {
             if (await _repo.IsExistAsync(r => r.Amount.ToLower() == dto.Amount.ToLower()))
-                throw new Exception("Already exist");
+                throw new AlreadyExistException<Salary>();
             await _repo.CreateAsync(_mapper.Map<Salary>(dto));
             await _repo.SaveAsync();
 
