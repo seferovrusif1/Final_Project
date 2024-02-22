@@ -21,10 +21,17 @@ namespace JobSearch.Api.Controllers
             _addSMservice = addSMservice;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("GetAll")]
+        [Authorize(Roles = "Admin" )]
+        public IActionResult Get()
         {
             return Ok(_service.GetAll());
+        }
+
+        [HttpGet("GetAllActive")]
+        public IActionResult GetActive()
+        {
+            return Ok(_service.GetAllActive());
         }
         [HttpPost]
         [Authorize]
@@ -60,6 +67,13 @@ namespace JobSearch.Api.Controllers
         public async Task<IActionResult> DeleteCompanyAsync(int id)
         {
             await _service.Delete(id);
+            return Ok();
+        }
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ConfirmedCompanyAsync(int id)
+        {
+            await _service.Confirmed(id);
             return Ok();
         }
     }

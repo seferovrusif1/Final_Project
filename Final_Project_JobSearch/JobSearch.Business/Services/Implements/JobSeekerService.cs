@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.JobSeekerDTOs;
+using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
@@ -76,6 +77,12 @@ namespace JobSearch.Business.Services.Implements
             await _repo.CreateAsync(_mapper.Map<JobSeeker>(data));
             await _repo.SaveAsync();
         }
+        public IEnumerable<JobSeekerListItemDTO> GetAllActive()
+        {
+            var data = _repo.GetAll(true, "Phone", "Email", "Category",  "Gender", "Education", "ExperienceYear", "City").Select(a =>!a.IsDleted);
+            return _mapper.Map<IEnumerable<JobSeekerListItemDTO>>(data);
+
+        }
 
         public IEnumerable<JobSeekerListItemDTO> GetAll()
         {
@@ -108,6 +115,30 @@ namespace JobSearch.Business.Services.Implements
             if (data == null) throw new NotFoundException<JobSeeker>();
             if (data.UserId != userId) throw new Exception("User has no access");
             data.IsDleted = false;
+            await _repo.SaveAsync();
+
+        }
+        public async Task Confirmed(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<JobSeeker>();
+            data.IsConfirmed = true;
+            await _repo.SaveAsync();
+
+        }
+        public async Task MakePremium(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<JobSeeker>();
+            data.IsPremium = true;
+            await _repo.SaveAsync();
+
+        }
+        public async Task ReversePremium(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<JobSeeker>();
+            data.IsPremium = false;
             await _repo.SaveAsync();
 
         }

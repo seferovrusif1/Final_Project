@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.ExperianceYearDTOs
 {
     public class ExperienceYearListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string ExpYear { get; set; }
     }
     public class ExperianceYearListItemDTODTOValidator : AbstractValidator<ExperienceYearListItemDTO>

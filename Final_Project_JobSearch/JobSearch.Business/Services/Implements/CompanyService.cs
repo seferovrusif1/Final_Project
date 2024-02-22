@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.CompanyDTOs;
 using JobSearch.Business.DTOs.SMCompanyDTOs;
+using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
@@ -12,7 +13,7 @@ using System.Security.Claims;
 
 namespace JobSearch.Business.Services.Implements
 {
-    public class CompanyService:ICompanyService
+    public class CompanyService : ICompanyService
     {
         ICompanyRepository _repo { get; }
         IPhoneRepository _phoneRepo { get; }
@@ -68,13 +69,17 @@ namespace JobSearch.Business.Services.Implements
 
             await _repo.SaveAsync();
         }
-
+        IEnumerable<CompanyListItemDTO> ICompanyService.GetAllActive()
+        {
+            var data = _repo.GetAll(true, "Phone", "Email").Select(a => !a.IsDleted);
+            return _mapper.Map<IEnumerable<CompanyListItemDTO>>(data);
+        }
         public IEnumerable<CompanyListItemDTO> GetAll()
         {
             var data=_repo.GetAll(true,"Phone","Email");
             return  _mapper.Map<IEnumerable<CompanyListItemDTO>>(data);
         }
-
+        
         public async Task Delete(int id)
         {
             var data = await _repo.GetByIdAsync(id, false);
@@ -103,6 +108,15 @@ namespace JobSearch.Business.Services.Implements
             await _repo.SaveAsync();
 
         }
+        public async Task Confirmed(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Company>();
+            data.IsConfirmed = true;
+            await _repo.SaveAsync();
 
+        }
+
+       
     }
 }

@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.SocialMediaDTOs
 {
     public class SocialMediaListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string Title { get; set; }
         public string Icon { get; set; }
         public string MainLink { get; set; }

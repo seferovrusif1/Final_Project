@@ -35,7 +35,6 @@ namespace JobSearch.Business.Services.Implements
         {
             //if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
             //    throw new Exception("Already exist");
-            ///TODO:getbyid ile parent id olub olmadigini tap
             Vacancy data = new Vacancy
             {
                 CategoryId = dto.CategoryId,
@@ -73,13 +72,20 @@ namespace JobSearch.Business.Services.Implements
                 await _phoneRepo.SaveAsync();
             }
             data.PhoneId = _phoneRepo.GetIdFromNumber(dto.Phone);
+            data.LastActiveTime=DateTime.Now.AddDays(30);
             await _repo.CreateAsync(_mapper.Map<Vacancy>(data));
             await _repo.SaveAsync();
         }
 
+        public IEnumerable<VacancyListItemDTO> GetAllActive()
+        {
+            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType").Select(a => a.LastActiveTime > DateTime.Now && !a.IsDleted);
+            return _mapper.Map<IEnumerable<VacancyListItemDTO>>(data);
+
+        }
         public IEnumerable<VacancyListItemDTO> GetAll()
         {
-            var data = _repo.GetAll(true, "Phone", "Email","Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType");
+            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType");
             return _mapper.Map<IEnumerable<VacancyListItemDTO>>(data);
 
         }
@@ -108,6 +114,30 @@ namespace JobSearch.Business.Services.Implements
             if (data == null) throw new NotFoundException<Vacancy>();
             if (data.UserId != userId) throw new Exception("User has no access");
             data.IsDleted = false;
+            await _repo.SaveAsync();
+
+        }
+        public async Task Confirmed(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Vacancy>();
+            data.IsConfirmed = true;
+            await _repo.SaveAsync();
+
+        }
+        public async Task MakePremium(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Vacancy>();
+            data.IsPremium = true;
+            await _repo.SaveAsync();
+
+        }
+        public async Task ReversePremium(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Vacancy>();
+            data.IsPremium = false;
             await _repo.SaveAsync();
 
         }

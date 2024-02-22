@@ -28,8 +28,12 @@ namespace JobSearch.Business.Services.Implements
         {
             if (await _repo.IsExistAsync(r => r.Name.ToLower() == dto.Name.ToLower()))
                 throw new AlreadyExistException<Category>();
+            if (dto.ParentId != null)
+            {
+                var data = await _repo.GetByIdAsync(dto.ParentId.Value, false);
+                if (data == null) throw new NotFoundException<Category>("ParentId Not Found");
 
-            ///TODO:getbyid ile parent id olub olmadigini tap
+            }
             await _repo.CreateAsync(_mapper.Map<Category>(dto));
             await _repo.SaveAsync();
         }

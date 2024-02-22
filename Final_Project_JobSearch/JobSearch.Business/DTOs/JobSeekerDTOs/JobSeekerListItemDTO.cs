@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
 {
     public class JobSeekerListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Name { get; set; }

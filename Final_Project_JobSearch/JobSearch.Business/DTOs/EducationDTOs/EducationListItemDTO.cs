@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.EducationDTOs
 {
     public class EducationListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string Degree { get; set; }
     }
     public class EducationListItemDTOValidtor : AbstractValidator<EducationListItemDTO>

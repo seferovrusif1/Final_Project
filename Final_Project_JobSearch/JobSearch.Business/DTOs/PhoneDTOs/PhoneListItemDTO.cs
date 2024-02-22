@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.PhoneDTOs
 {
      public class PhoneListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string Number { get; set; }
 
     }

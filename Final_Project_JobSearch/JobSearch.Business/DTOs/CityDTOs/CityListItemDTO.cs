@@ -9,6 +9,9 @@ namespace JobSearch.Business.DTOs.CityDTOs
 {
     public class CityListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string Name { get; set; }
     }
     public class CityListItemDTOValidator : AbstractValidator<CityListItemDTO>

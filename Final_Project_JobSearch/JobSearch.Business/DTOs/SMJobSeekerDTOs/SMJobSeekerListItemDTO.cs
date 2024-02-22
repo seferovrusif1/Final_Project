@@ -4,6 +4,9 @@ namespace JobSearch.Business.DTOs.SMJobSeekerDTOs
 {
     public class SMJobSeekerListItemDTO
     {
+        public int Id { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public bool IsDleted { get; set; }
         public string SocialMediaId { get; set; }
         public string JobSeekerId { get; set; }
 

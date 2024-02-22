@@ -18,11 +18,17 @@ namespace JobSearch.Api.Controllers
             _service = service;
             _addSMservice = addSMservice;
         }
-
-        [HttpGet]
+        [HttpGet("GetAll")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Get()
         {
             return Ok(_service.GetAll());
+        }
+
+        [HttpGet("GetAllActive")]
+        public IActionResult GetActive()
+        {
+            return Ok(_service.GetAllActive());
         }
         [HttpPost]
         [Authorize]
@@ -40,23 +46,44 @@ namespace JobSearch.Api.Controllers
         }
         [HttpPut("SoftDelete")]
         [Authorize]
-        public async Task<IActionResult> SoftDeleteCompanyAsync(int id)
+        public async Task<IActionResult> SoftDeleteJobSeekerAsync(int id)
         {
             await _service.SoftDelete(id);
             return Ok();
         }
         [HttpPut("ReverseSoftDelete")]
         [Authorize]
-        public async Task<IActionResult> ReverseSoftDeleteCompanyAsync(int id)
+        public async Task<IActionResult> ReverseSoftDeleteJobSeekerAsync(int id)
         {
             await _service.ReverseSoftDelete(id);
             return Ok();
         }
         [HttpDelete]
         [Authorize]
-        public async Task<IActionResult> DeleteCompanyAsync(int id)
+        public async Task<IActionResult> DeleteJobSeekerAsync(int id)
         {
             await _service.Delete(id);
+            return Ok();
+        }
+        [HttpPut("Confirmed")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ConfirmedJobSeekerAsync(int id)
+        {
+            await _service.Confirmed(id);
+            return Ok();
+        }
+        [HttpPut("MakePremium")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MakePremiumJobSeekerAsync(int id)
+        {
+            await _service.MakePremium(id);
+            return Ok();
+        }
+        [HttpPut("ReversePremium")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ReversePremiumJobSeekerAsync(int id)
+        {
+            await _service.ReversePremium(id);
             return Ok();
         }
     }

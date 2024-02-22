@@ -23,7 +23,6 @@ namespace JobSearch.Business.Services.Implements
             if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
                 throw new AlreadyExistException<WorkType>();
 
-            ///TODO:getbyid ile parent id olub olmadigini tap
             await _repo.CreateAsync(_mapper.Map< WorkType > (dto));
             await _repo.SaveAsync();
         }
