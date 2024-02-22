@@ -2,6 +2,7 @@
 using JobSearch.Business.DTOs.GenderDTOs;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
         [HttpPost]
+    [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateGenderAsync(GenderCreateDTO dto)
         {
             await _service.CreateAsync(dto);

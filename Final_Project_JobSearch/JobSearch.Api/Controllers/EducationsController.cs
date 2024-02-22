@@ -1,6 +1,7 @@
 ﻿using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.DTOs.EmailDTOs;
 using JobSearch.Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,13 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet]
+    [Authorize]
         public IActionResult Get()
         {
             return Ok(_service.GetAll());
         }
         [HttpPost]
+    [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateEducationAsync(EducationCreateDTO dto)
         {
             await _service.CreateAsync(dto);

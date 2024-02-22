@@ -1,6 +1,7 @@
 ﻿using JobSearch.Business.DTOs.PhoneDTOs;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,13 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet]
+    [Authorize]
         public IActionResult Get()
         {
             return Ok(_service.GetAll());
         }
         [HttpPost]
+    [Authorize]
         public async Task<IActionResult> CreatePhoneAsync(PhoneCreateDTO dto)
         {
             await _service.CreateAsync(dto);
