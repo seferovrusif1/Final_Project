@@ -24,7 +24,19 @@ namespace JobSearch.Business.Repositories.Implements
         ///TODO: tekrar nezer yetir
         public IQueryable<T> GetAll(bool noTracking = true, params string[] include)
         {
-            IQueryable<T> query=Table.AsQueryable();
+            IQueryable<T> query = Table.AsQueryable();
+            if (include != null && include.Length > 0)
+            {
+                foreach (var item in include)
+                {
+                    query = query.Include(item);
+                }
+            }
+            return noTracking ? query.AsNoTracking() : query;
+        }
+        public IQueryable<T> GetAllActive(bool noTracking = true, params string[] include)
+        {
+            IQueryable<T> query = Table.AsQueryable();
             if (include != null && include.Length > 0)
             {
                 foreach (var item in include)

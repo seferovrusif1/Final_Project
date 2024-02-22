@@ -28,11 +28,11 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
 
-        [HttpGet("GetAllActive")]
-        public IActionResult GetActive()
-        {
-            return Ok(_service.GetAllActive());
-        }
+        //[HttpGet("GetAllActive")]
+        //public IActionResult GetActive()
+        //{
+        //    return Ok(_service.GetAllActive());
+        //}
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateCompanyAsync(CompanyCreateDTO dto)
