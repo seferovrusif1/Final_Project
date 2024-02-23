@@ -6,8 +6,9 @@ namespace JobSearch.Business.DTOs.VacancyDTOs
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
         public string CompanyAbout { get; set; }
-        public string UserName { get; set; }
+        //public string UserName { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDleted { get; set; }
         public string Email { get; set; }

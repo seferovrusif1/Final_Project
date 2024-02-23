@@ -95,6 +95,14 @@ namespace JobSearch.Business.Services.Implements
             await _repo.SaveAsync();
 
         }
+        public async Task ReverseConfirmed(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Company>();
+            data.IsConfirmed = false;
+            await _repo.SaveAsync();
+
+        }
         ///TODO: MApper le yazmaqi fikrles
         public async Task Update(int id, CompanyUpdateDTO dto)
         {

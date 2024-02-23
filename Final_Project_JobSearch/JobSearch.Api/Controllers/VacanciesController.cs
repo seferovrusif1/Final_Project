@@ -64,6 +64,13 @@ namespace JobSearch.Api.Controllers
             await _service.Confirmed(id);
             return Ok();
         }
+        [HttpPut("ReverseConfirmed")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ReverseConfirmedVacancyAsync(int id)
+        {
+            await _service.ReverseConfirmed(id);
+            return Ok();
+        }
         [HttpPut("MakePremium")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> MakePremiumVacancyAsync(int id)
@@ -85,11 +92,16 @@ namespace JobSearch.Api.Controllers
             await _service.Update(id, dto);
             return Ok();
         }
-     
+
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _service.GetByIdAsync(id));
+        }
+        [HttpGet("GetById(ShortInfo)")]
+        public async Task<IActionResult> GetByIdShort(int id)
+        {
+            return Ok(await _service.GetByIdShortAsync(id));
         }
     }
 }

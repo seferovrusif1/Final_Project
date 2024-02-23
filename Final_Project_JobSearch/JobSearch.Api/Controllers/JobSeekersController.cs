@@ -73,6 +73,13 @@ namespace JobSearch.Api.Controllers
             await _service.Confirmed(id);
             return Ok();
         }
+        [HttpPut("ReverseConfirmed")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ReverseConfirmedJobSeekerAsync(int id)
+        {
+            await _service.ReverseConfirmed(id);
+            return Ok();
+        }
         [HttpPut("MakePremium")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> MakePremiumJobSeekerAsync(int id)

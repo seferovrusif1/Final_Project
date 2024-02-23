@@ -21,6 +21,7 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             return Ok(_service.GetAll());

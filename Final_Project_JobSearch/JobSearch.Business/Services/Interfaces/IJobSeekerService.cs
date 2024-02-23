@@ -11,6 +11,7 @@ namespace JobSearch.Business.Services.Interfaces
         Task SoftDelete(int id);
         Task ReverseSoftDelete(int id);
         Task Confirmed(int id);
+        Task ReverseConfirmed(int id);
         Task ReversePremium(int id);
         Task MakePremium(int id);
         Task Update(int id, JobSeekerUpdateDTO dto);

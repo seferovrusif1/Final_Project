@@ -11,6 +11,7 @@ namespace JobSearch.Business.Profiles
             CreateMap<VacancyCreateDTO, Vacancy>();
             CreateMap<VacancyUpdateDTO, Vacancy>().ReverseMap();
             CreateMap<VacancyInfoDTO, Vacancy>().ReverseMap();
+            CreateMap<VacancyShortInfoDTO, Vacancy>().ReverseMap();
             CreateMap<Vacancy, VacancyListItemDTO>()
                   .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone.Number))
                   .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email.EmailAddress))
@@ -24,7 +25,8 @@ namespace JobSearch.Business.Profiles
                   .ForMember(dest => dest.WorkType, opt => opt.MapFrom(src => src.WorkType.Title))
                   .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.Company.Name))
                   .ForMember(dest => dest.CompanyAbout, opt => opt.MapFrom(src => src.Company.About))
-                  .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Company.User.Name));
+                  .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id));
+                  //.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Company.UserId));
         }
     }
 }

@@ -129,6 +129,15 @@ namespace JobSearch.Business.Services.Implements
             await _repo.SaveAsync();
 
         }
+        public async Task ReverseConfirmed(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<JobSeeker>();
+            data.IsConfirmed = false;
+            data.LastActiveTime = DateTime.Now.AddDays(30);
+            await _repo.SaveAsync();
+
+        }
         public async Task MakePremium(int id)
         {
             var data = await _repo.GetByIdAsync(id, false);

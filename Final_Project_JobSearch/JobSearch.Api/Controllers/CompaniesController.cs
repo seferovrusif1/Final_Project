@@ -1,9 +1,7 @@
 ﻿using JobSearch.Business.DTOs.CompanyDTOs;
 using JobSearch.Business.DTOs.SMCompanyDTOs;
 using JobSearch.Business.Services.Interfaces;
-using JobSearch.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSearch.Api.Controllers
@@ -29,6 +27,7 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet("GetAllActive")]
+        [Authorize]
         public IActionResult GetActive()
         {
             return Ok(_service.GetAllActive());
@@ -77,6 +76,13 @@ namespace JobSearch.Api.Controllers
             await _service.Confirmed(id);
             return Ok();
         }
+        [HttpPut("ReverseConfirmed")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ReverseConfirmedCompanyAsync(int id)
+        {
+            await _service.ReverseConfirmed(id);
+            return Ok();
+        }
         [HttpPut("Update")]
         [Authorize]
         public async Task<IActionResult> UpdatedCompanyAsync(int id,CompanyUpdateDTO dto)
@@ -85,6 +91,7 @@ namespace JobSearch.Api.Controllers
             return Ok();
         }
         [HttpGet("GetById")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _service.GetByIdAsync(id));

@@ -1,9 +1,6 @@
-﻿using JobSearch.Business.DTOs.ExperianceYearDTOs;
-using JobSearch.Business.DTOs.SocialMediaDTOs;
-using JobSearch.Business.DTOs.WorkTypeDTOs;
+﻿using JobSearch.Business.DTOs.WorkTypeDTOs;
 using JobSearch.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSearch.Api.Controllers
