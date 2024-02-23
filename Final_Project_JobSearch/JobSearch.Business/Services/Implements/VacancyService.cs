@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSearch.Business.DTOs.JobSeekerDTOs;
 using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
@@ -14,11 +15,12 @@ namespace JobSearch.Business.Services.Implements
         IVacancyRepository _repo { get; }
         IMapper _mapper { get; }
         IPhoneRepository _phoneRepo { get; }
+        ICompanyRepository _companyRepo { get; }
         IEmailRepository _emailRepo { get; }
-        readonly string userId;
         IHttpContextAccessor _contextAccessor { get; }
+        readonly string userId;
 
-        public VacancyService(IVacancyRepository repo, IMapper mapper, IHttpContextAccessor contextAccessor, IPhoneRepository phoneRepo, IEmailRepository emailRepo)
+        public VacancyService(IVacancyRepository repo, IMapper mapper, IHttpContextAccessor contextAccessor, IPhoneRepository phoneRepo, IEmailRepository emailRepo, ICompanyRepository companyRepo)
         {
             _repo = repo;
             _mapper = mapper;
@@ -29,12 +31,12 @@ namespace JobSearch.Business.Services.Implements
             }
             _phoneRepo = phoneRepo;
             _emailRepo = emailRepo;
+            _companyRepo = companyRepo;
         }
 
         public async Task CreateAsync(VacancyCreateDTO dto)
         {
-            //if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
-            //    throw new Exception("Already exist");
+        
             Vacancy data = new Vacancy
             {
                 CategoryId = dto.CategoryId,
@@ -55,7 +57,10 @@ namespace JobSearch.Business.Services.Implements
                 Website = dto.Website,
 
             };
-            data.UserId = userId;
+            Company company = await _companyRepo.GetByIdAsync(dto.CompanyId, false);
+            if (company == null) throw new NotFoundException<Company>();
+            if (company.UserId != userId) throw new Exception("User has no access");
+            data.CompanyId = company.Id;
             ///TODO:daha optimal ola bilerdi(ilk create edib exception tut ama unique lazmdi
             if (_emailRepo.GetIdFromEmail(dto.Email) == 0)
             {
@@ -72,20 +77,24 @@ namespace JobSearch.Business.Services.Implements
                 await _phoneRepo.SaveAsync();
             }
             data.PhoneId = _phoneRepo.GetIdFromNumber(dto.Phone);
-            data.LastActiveTime=DateTime.Now.AddDays(30);
+            data.LastActiveTime=DateTime.Now;
             await _repo.CreateAsync(_mapper.Map<Vacancy>(data));
             await _repo.SaveAsync();
         }
 
         public IEnumerable<VacancyListItemDTO> GetAllActive()
         {
-            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType").Select(a => a.LastActiveTime > DateTime.Now && !a.IsDleted);
+            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType","Company")
+                .Where(a => a.LastActiveTime > DateTime.Now &&
+                            a.DeadLine > DateTime.Now  &&
+                            !a.IsDleted)
+                            .OrderByDescending(q=>q.IsPremium);
             return _mapper.Map<IEnumerable<VacancyListItemDTO>>(data);
 
         }
         public IEnumerable<VacancyListItemDTO> GetAll()
         {
-            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType");
+            var data = _repo.GetAll(true, "Phone", "Email", "Category", "MaxSalary", "Gender", "Education", "ExperienceYear", "City", "TypeOfVacancy", "WorkType","Company");
             return _mapper.Map<IEnumerable<VacancyListItemDTO>>(data);
 
         }
@@ -93,7 +102,7 @@ namespace JobSearch.Business.Services.Implements
         {
             var data = await _repo.GetByIdAsync(id, false);
             if (data == null) throw new NotFoundException<Vacancy>();
-            if (data.UserId != userId) throw new Exception("User has no access");
+            //if (data.UserId != userId) throw new Exception("User has no access");
             _repo.Remove(data);
             await _repo.SaveAsync();
         }
@@ -102,7 +111,7 @@ namespace JobSearch.Business.Services.Implements
         {
             var data = await _repo.GetByIdAsync(id, false);
             if (data == null) throw new NotFoundException<Vacancy>();
-            if (data.UserId != userId) throw new Exception("User has no access");
+            //if (data.UserId != userId) throw new Exception("User has no access");
             data.IsDleted = true;
             await _repo.SaveAsync();
 
@@ -112,7 +121,7 @@ namespace JobSearch.Business.Services.Implements
         {
             var data = await _repo.GetByIdAsync(id, false);
             if (data == null) throw new NotFoundException<Vacancy>();
-            if (data.UserId != userId) throw new Exception("User has no access");
+            //if (data.UserId != userId) throw new Exception("User has no access");
             data.IsDleted = false;
             await _repo.SaveAsync();
 
@@ -122,6 +131,7 @@ namespace JobSearch.Business.Services.Implements
             var data = await _repo.GetByIdAsync(id, false);
             if (data == null) throw new NotFoundException<Vacancy>();
             data.IsConfirmed = true;
+            data.LastActiveTime = DateTime.UtcNow.AddDays(30);
             await _repo.SaveAsync();
 
         }
@@ -141,6 +151,56 @@ namespace JobSearch.Business.Services.Implements
             await _repo.SaveAsync();
 
         }
+
+        public async Task Update(int id, VacancyUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Vacancy>();
+            //if (data.UserId != userId) throw new Exception("User has no access");
+
+            data.CategoryId = dto.CategoryId;
+            data.Position = dto.Position;
+            data.MaxSalaryId = dto.MaxSalaryId;
+            data.AboutWork = dto.AboutWork;
+            data.Requirements = dto.Requirements;
+            data.MaxYas = dto.MaxYas;
+            data.MinYas = dto.MinYas;
+            data.GenderId = dto.GenderId;
+            data.EducationId = dto.EducationId;
+            data.ExperienceYearId = dto.ExperienceYearId;
+            data.CityId = dto.CityId;
+            data.TypeOfVacancyId = dto.TypeOfVacancyId;
+            data.WorkTypeId = dto.WorkTypeId;
+            data.AuthorizedPerson = dto.AuthorizedPerson;
+            data.DeadLine = dto.DeadLine;
+            data.Website = dto.Website;
+
+            data.IsConfirmed=false;
+            if (_emailRepo.GetIdFromEmail(dto.Email) == 0)
+            {
+                Email email = new Email { EmailAddress = dto.Email };
+                await _emailRepo.CreateAsync(email);
+                await _emailRepo.SaveAsync();
+            }
+            data.EmailId = _emailRepo.GetIdFromEmail(dto.Email);
+
+            if (_phoneRepo.GetIdFromNumber(dto.Phone) == 0)
+            {
+                Phone phone = new Phone { Number = dto.Phone };
+                await _phoneRepo.CreateAsync(phone);
+                await _phoneRepo.SaveAsync();
+            }
+            data.PhoneId = _phoneRepo.GetIdFromNumber(dto.Phone);
+            await _repo.SaveAsync();
+        }
+
+        public async Task<VacancyInfoDTO> GetByIdAsync(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, true);
+            if (data == null) throw new NotFoundException<Vacancy>("Vacancy Not Found");
+            return _mapper.Map<VacancyInfoDTO>(data);
+        }
+        
     }
 }
 

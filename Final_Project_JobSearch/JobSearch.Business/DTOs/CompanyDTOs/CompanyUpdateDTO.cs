@@ -1,8 +1,13 @@
 ﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace JobSearch.Business.DTOs.CompanyDTOs
 {
-    public class CompanyCreateDTO
+    public class CompanyUpdateDTO
     {
         public string Name { get; set; }
         public string About { get; set; }
@@ -11,9 +16,9 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
         public string AuthorizedPerson { get; set; }
         public string Website { get; set; }
     }
-    public class CompanyCreateDTOValidator : AbstractValidator<CompanyCreateDTO>
+    public class CompanyUpdateDTOValidator : AbstractValidator<CompanyUpdateDTO>
     {
-        public CompanyCreateDTOValidator()
+        public CompanyUpdateDTOValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
@@ -21,7 +26,7 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
                 .MaximumLength(32);
             RuleFor(x => x.About)
                 .MaximumLength(2048);
-
+           
             RuleFor(x => x.AuthorizedPerson)
                 .NotEmpty()
                 .NotNull()

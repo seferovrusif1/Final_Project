@@ -2,13 +2,13 @@
 
 namespace JobSearch.Business.DTOs.WorkTypeDTOs
 {
-    public class WorkTypeCreateDTO
+    public class WorkTypeUpdateDTO
     {
         public string Title { get; set; }
     }
-    public class WorkTypeCreateDTOValidator : AbstractValidator<WorkTypeCreateDTO>
+    public class WorkTypeUpdateDTOValidator : AbstractValidator<WorkTypeUpdateDTO>
     {
-        public WorkTypeCreateDTOValidator()
+        public WorkTypeUpdateDTOValidator()
         {
             RuleFor(a => a.Title)
                 .NotEmpty()

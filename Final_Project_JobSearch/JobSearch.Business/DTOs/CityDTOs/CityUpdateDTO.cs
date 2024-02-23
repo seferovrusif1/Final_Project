@@ -2,13 +2,13 @@
 
 namespace JobSearch.Business.DTOs.CityDTOs
 {
-    public class CityCreateDTO
+    public class CityUpdateDTO
     {
         public string Name { get; set; }
     }
-    public class CityCreateDTOValidator : AbstractValidator<CityCreateDTO>
+    public class CityUpdateDTOValidator : AbstractValidator<CityUpdateDTO>
     {
-        public CityCreateDTOValidator()
+        public CityUpdateDTOValidator()
         {
             RuleFor(a => a.Name)
                 .NotEmpty()

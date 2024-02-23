@@ -8,7 +8,9 @@ namespace JobSearch.Business.Profiles
     {
         public ExperienceYearMappingProfile()
         {
+            
             CreateMap<ExperienceYearCreateDTO, ExperienceYear>();
+            CreateMap<ExperienceYearUpdateDTO, ExperienceYear>();
             CreateMap<ExperienceYear, ExperienceYearListItemDTO>();
         }
     }

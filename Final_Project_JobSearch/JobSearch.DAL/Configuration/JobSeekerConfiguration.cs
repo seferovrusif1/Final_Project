@@ -34,6 +34,9 @@ namespace JobSearch.DAL.Configuration
             builder.Property(a => a.BirthDate)
                 .IsRequired()
                 .HasColumnType("date");
+            builder.Property(a => a.LastActiveTime)
+                .IsRequired()
+                .HasColumnType("date");
             builder.Property(a => a.ExperienceDetail)
                 .IsRequired().
                 HasMaxLength(1024);

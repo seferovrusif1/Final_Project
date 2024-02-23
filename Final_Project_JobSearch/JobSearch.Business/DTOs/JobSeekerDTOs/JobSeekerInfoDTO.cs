@@ -1,18 +1,11 @@
 ﻿using FluentValidation;
-using JobSearch.Business.DTOs.VacancyDTOs;
-using JobSearch.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.Business.DTOs.JobSeekerDTOs
 {
-    public class JobSeekerCreateDTO
+    public class JobSeekerInfoDTO
     {
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public int EmailId { get; set; }
+        public int PhoneId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string FatherName { get; set; }
@@ -31,20 +24,18 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
         public string AdditionalInformation { get; set; }
         public DateTime BirthDate { get; set; }
     }
-    public class JobSeekerCreateDTOValidator : AbstractValidator<JobSeekerCreateDTO>
+    public class JobSeekerInfoDTOValidator : AbstractValidator<JobSeekerInfoDTO>
     {
-        public JobSeekerCreateDTOValidator()
+        public JobSeekerInfoDTOValidator()
         {
-            RuleFor(x => x.Email)
+            RuleFor(x => x.EmailId)
                 .NotEmpty()
                 .NotNull()
-                .EmailAddress()
-                .MaximumLength(320);
-            RuleFor(a => a.Phone)
+                .GreaterThan(0);
+            RuleFor(a => a.PhoneId)
                .NotEmpty()
                .NotNull()
-               .MaximumLength(16)
-               .MinimumLength(7);
+               .GreaterThan(0);
             RuleFor(a => a.CategoryId)
                 .NotEmpty()
                 .NotNull()
@@ -74,7 +65,7 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
             RuleFor(a => a.AdditionalInformation)
                .MaximumLength(1024);
             RuleFor(a => a.BirthDate)
-                .LessThan(DateTime.Now.AddYears(13)); 
+                .LessThan(DateTime.Now.AddYears(13));
             RuleFor(a => a.ExperienceDetail)
               .NotEmpty()
               .NotNull()

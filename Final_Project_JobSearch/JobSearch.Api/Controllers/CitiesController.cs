@@ -1,4 +1,5 @@
 ﻿using JobSearch.Business.DTOs.CityDTOs;
+using JobSearch.Business.DTOs.CompanyDTOs;
 using JobSearch.Business.DTOs.ExperianceYearDTOs;
 using JobSearch.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,20 @@ namespace JobSearch.Api.Controllers
         public async Task<IActionResult> CreateCityAsync(CityCreateDTO dto)
         {
             await _service.CreateAsync(dto);
+            return Ok();
+        }
+        [HttpPut("Update")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdatedAsync(int id, CityUpdateDTO dto)
+        {
+            await _service.Update(id, dto);
+            return Ok();
+        }
+        [HttpDelete]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            await _service.Delete(id);
             return Ok();
         }
     }

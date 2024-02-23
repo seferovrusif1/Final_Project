@@ -1,4 +1,5 @@
 ﻿using JobSearch.Business.DTOs.EmailDTOs;
+using JobSearch.Business.DTOs.ExperianceYearDTOs;
 using JobSearch.Business.DTOs.GenderDTOs;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
@@ -29,6 +30,20 @@ namespace JobSearch.Api.Controllers
         public async Task<IActionResult> CreateGenderAsync(GenderCreateDTO dto)
         {
             await _service.CreateAsync(dto);
+            return Ok();
+        }
+        [HttpPut("Update")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdatedAsync(int id, GenderUpdateDTO dto)
+        {
+            await _service.Update(id, dto);
+            return Ok();
+        }
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            await _service.Delete(id);
             return Ok();
         }
     }

@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.CityDTOs;
-using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.Business.Services.Implements
 {
@@ -37,5 +31,21 @@ namespace JobSearch.Business.Services.Implements
             var data = _repo.GetAll();
             return _mapper.Map<IEnumerable<CityListItemDTO>>(data);
         }
+        public async Task Update(int id, CityUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<City>();
+            if (await _repo.IsExistAsync(r => r.Name.ToLower() == dto.Name.ToLower()))
+                throw new AlreadyExistException<City>();
+            data = _mapper.Map(dto, data);
+            await _repo.SaveAsync();
+        }
+        public async Task Delete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<City>();
+            _repo.Remove(data);
+            await _repo.SaveAsync();
+        }
     }
-}
+    }

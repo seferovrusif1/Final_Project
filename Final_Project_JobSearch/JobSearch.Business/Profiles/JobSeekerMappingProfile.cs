@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.JobSeekerDTOs;
-using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Core.Entities;
 
 namespace JobSearch.Business.Profiles
@@ -10,6 +9,8 @@ namespace JobSearch.Business.Profiles
         public JobSeekerMappingProfile()
         {
             CreateMap<JobSeekerCreateDTO, JobSeeker>();
+            CreateMap<JobSeekerUpdateDTO, JobSeeker>().ReverseMap();
+            CreateMap<JobSeekerInfoDTO, JobSeeker>().ReverseMap();
             CreateMap<JobSeeker, JobSeekerListItemDTO>()
                   .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone.Number))
                   .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email.EmailAddress))

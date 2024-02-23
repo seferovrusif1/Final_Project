@@ -14,6 +14,7 @@ namespace JobSearch.Business.Profiles
         public CategoryMappingProfile()
         {
             CreateMap<CategoryCreateDTO, Category>();
+            CreateMap<CategoryUpdateDTO, Category>();
             CreateMap<Category, CategoryListItemDTO>();
         }
     }

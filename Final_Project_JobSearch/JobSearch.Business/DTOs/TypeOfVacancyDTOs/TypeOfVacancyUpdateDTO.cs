@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 
-namespace JobSearch.Business.DTOs.WorkTypeDTOs
+namespace JobSearch.Business.DTOs.TypeOfVacancyDTOs
 {
-    public class WorkTypeCreateDTO
+    public class TypeOfVacancyUpdateDTO
     {
         public string Title { get; set; }
     }
-    public class WorkTypeCreateDTOValidator : AbstractValidator<WorkTypeCreateDTO>
+    public class TypeOfVacancyUpdateDTOValidator : AbstractValidator<TypeOfVacancyUpdateDTO>
     {
-        public WorkTypeCreateDTOValidator()
+        public TypeOfVacancyUpdateDTOValidator()
         {
             RuleFor(a => a.Title)
                 .NotEmpty()

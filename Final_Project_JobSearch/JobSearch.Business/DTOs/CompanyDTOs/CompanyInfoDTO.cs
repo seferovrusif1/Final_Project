@@ -2,18 +2,19 @@
 
 namespace JobSearch.Business.DTOs.CompanyDTOs
 {
-    public class CompanyCreateDTO
+    public class CompanyInfoDTO
     {
+
         public string Name { get; set; }
         public string About { get; set; }
-        //public string Email { get; set; }
-        //public string Phone { get; set; }
+        //public int EmailId { get; set; }
+        //public int PhoneId { get; set; }
         public string AuthorizedPerson { get; set; }
         public string Website { get; set; }
     }
-    public class CompanyCreateDTOValidator : AbstractValidator<CompanyCreateDTO>
+    public class CompanyInfoDTOValidator : AbstractValidator<CompanyInfoDTO>
     {
-        public CompanyCreateDTOValidator()
+        public CompanyInfoDTOValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
@@ -34,3 +35,4 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
         }
     }
 }
+

@@ -32,6 +32,7 @@
         public string LanguageSkills { get; set; }
         public string AdditionalInformation{ get; set; }
         public DateTime BirthDate { get; set; }
+        public DateTime LastActiveTime { get; set; }
         public bool IsPremium{ get; set; }
         public bool IsConfirmed { get; set; }
         public IEnumerable<SocialMediaJobSeeker>? SocialMediaJobSeekers { get; set; }

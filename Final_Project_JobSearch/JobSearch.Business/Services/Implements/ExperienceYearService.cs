@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.DTOs.ExperianceYearDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
@@ -31,6 +32,22 @@ namespace JobSearch.Business.Services.Implements
         {
             var data = _repo.GetAll();
             return _mapper.Map<IEnumerable<ExperienceYearListItemDTO>>(data);
+        }
+        public async Task Update(int id, ExperienceYearUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<ExperienceYear>();
+            if (await _repo.IsExistAsync(r => r.ExpYear.ToLower() == dto.ExpYear.ToLower()))
+                throw new AlreadyExistException<ExperienceYear>();
+            data = _mapper.Map(dto, data);
+            await _repo.SaveAsync();
+        }
+        public async Task Delete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<ExperienceYear>();
+            _repo.Remove(data);
+            await _repo.SaveAsync();
         }
     }
 }

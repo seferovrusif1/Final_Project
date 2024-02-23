@@ -2,11 +2,11 @@
 
 namespace JobSearch.Business.DTOs.VacancyDTOs
 {
-    public class VacancyCreateDTO
+    public class VacancyInfoDTO
     {
         public int CompanyId { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public int EmailId { get; set; }
+        public int PhoneId { get; set; }
         public int CategoryId { get; set; }
         public string Position { get; set; }
         public int MaxSalaryId { get; set; }
@@ -24,20 +24,18 @@ namespace JobSearch.Business.DTOs.VacancyDTOs
         public DateTime DeadLine { get; set; }
         public string Website { get; set; }
     }
-    public class VacancyCreateDTOValidator : AbstractValidator<VacancyCreateDTO>
+    public class VacancyInfoDTOValidator : AbstractValidator<VacancyInfoDTO>
     {
-        public VacancyCreateDTOValidator()
+        public VacancyInfoDTOValidator()
         {
-            RuleFor(x => x.Email)
+            RuleFor(x => x.EmailId)
                 .NotEmpty()
                 .NotNull()
-                .EmailAddress()
-                .MaximumLength(320);
-            RuleFor(a => a.Phone)
+                .GreaterThan(0);
+            RuleFor(a => a.PhoneId)
                .NotEmpty()
                .NotNull()
-               .MaximumLength(16)
-               .MinimumLength(7);
+               .GreaterThan(0);
             RuleFor(a => a.CategoryId)
                 .NotEmpty()
                 .NotNull()

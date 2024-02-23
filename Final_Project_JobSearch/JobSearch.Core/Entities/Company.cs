@@ -6,16 +6,13 @@
         public AppUser? User { get; set; }
         public string Name { get; set; }
         public string About { get; set; }
-        public int EmailId { get; set; }
-        public Email? Email { get; set; }
-        public int PhoneId { get; set; }
-        public Phone? Phone { get; set; }
+    
         public string AuthorizedPerson { get; set; }
         ///TODO: belke ayri table a cixardim
         public string Website { get; set; }
         public bool IsConfirmed { get; set; }
         public IEnumerable<SocialMediaCompany>? SocialMediaCompany { get; set; }
-        //public IEnumerable<Vacancy>? Vacancies { get; set; }
+        public IEnumerable<Vacancy>? Vacancies { get; set; }
 
     }
 }

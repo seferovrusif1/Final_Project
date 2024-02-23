@@ -1,17 +1,12 @@
-﻿using JobSearch.Business.DTOs.EmailDTOs;
-using JobSearch.Business.DTOs.GenderDTOs;
-using JobSearch.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JobSearch.Business.DTOs.GenderDTOs;
 
 namespace JobSearch.Business.Services.Interfaces
 {
     public interface IGenderService
     {
         public IEnumerable<GenderListItemDTO> GetAll();
+        Task Delete(int id);
         public Task CreateAsync(GenderCreateDTO dto);
+        Task Update(int id, GenderUpdateDTO dto);
     }
 }

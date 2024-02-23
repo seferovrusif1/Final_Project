@@ -27,15 +27,15 @@ namespace JobSearch.DAL.Configuration
                   .HasForeignKey(x => x.UserId)
                   .OnDelete(DeleteBehavior.NoAction);
             
-            builder.HasOne(x => x.Email)
-                  .WithMany(u => u.Companies)
-                  .HasForeignKey(x => x.EmailId)
-                  .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(x => x.Email)
+            //      .WithMany(u => u.Companies)
+            //      .HasForeignKey(x => x.EmailId)
+            //      .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.Phone)
-                  .WithMany(u => u.Companies)
-                  .HasForeignKey(x => x.PhoneId)
-                  .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(x => x.Phone)
+            //      .WithMany(u => u.Companies)
+            //      .HasForeignKey(x => x.PhoneId)
+            //      .OnDelete(DeleteBehavior.NoAction);
             //builder.HasMany(x=>x.Vacancies)
             //    .WithOne(y=>y.Company)
             //    .HasForeignKey(x=>x.CompanyId)

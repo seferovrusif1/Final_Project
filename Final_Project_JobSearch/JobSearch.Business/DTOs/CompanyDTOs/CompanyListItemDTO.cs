@@ -14,8 +14,8 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
         public bool IsDleted { get; set; }
         public string Name { get; set; }
         public string About { get; set; }
-        public string EmailAddress { get; set; }
-        public string Number { get; set; }
+        //public string EmailAddress { get; set; }
+        //public string Number { get; set; }
         public string AuthorizedPerson { get; set; }
         public string Website { get; set; }
     }
@@ -29,16 +29,7 @@ namespace JobSearch.Business.DTOs.CompanyDTOs
                 .MaximumLength(32);
             RuleFor(x => x.About)
                 .MaximumLength(2048);
-            RuleFor(x => x.EmailAddress)
-                .NotEmpty()
-                .NotNull()
-                .EmailAddress()
-                .MaximumLength(320);
-            RuleFor(x => x.Number)
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(16)
-                .MinimumLength(7);
+
             RuleFor(x => x.AuthorizedPerson)
                 .NotEmpty()
                 .NotNull()

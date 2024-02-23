@@ -1,4 +1,5 @@
-﻿using JobSearch.Business.DTOs.JobSeekerDTOs;
+﻿using JobSearch.Business.DTOs.CompanyDTOs;
+using JobSearch.Business.DTOs.JobSeekerDTOs;
 using JobSearch.Business.DTOs.SMJobSeekerDTOs;
 using JobSearch.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -25,11 +26,11 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
 
-        //[HttpGet("GetAllActive")]
-        //public IActionResult GetActive()
-        //{
-        //    return Ok(_service.GetAllActive());
-        //}
+        [HttpGet("GetAllActive")]
+        public IActionResult GetActive()
+        {
+            return Ok(_service.GetAllActive());
+        }
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateJobSeekerAsync(JobSeekerCreateDTO dto)
@@ -85,6 +86,19 @@ namespace JobSearch.Api.Controllers
         {
             await _service.ReversePremium(id);
             return Ok();
+        }
+        [HttpPut("Update")]
+        [Authorize]
+        public async Task<IActionResult> UpdatedJobSeekerAsync(int id, JobSeekerUpdateDTO dto)
+        {
+            await _service.Update(id, dto);
+            return Ok();
+        }
+       
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.GetByIdAsync(id));
         }
     }
 }

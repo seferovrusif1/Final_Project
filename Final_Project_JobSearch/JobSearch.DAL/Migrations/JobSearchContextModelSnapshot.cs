@@ -92,9 +92,6 @@ namespace JobSearch.DAL.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmailId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
@@ -105,9 +102,6 @@ namespace JobSearch.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -117,10 +111,6 @@ namespace JobSearch.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmailId");
-
-                    b.HasIndex("PhoneId");
 
                     b.HasIndex("UserId");
 
@@ -287,6 +277,9 @@ namespace JobSearch.DAL.Migrations
                     b.Property<string>("LanguageSkills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastActiveTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -520,6 +513,9 @@ namespace JobSearch.DAL.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -573,10 +569,6 @@ namespace JobSearch.DAL.Migrations
                     b.Property<int>("TypeOfVacancyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Website")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -589,6 +581,8 @@ namespace JobSearch.DAL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("EducationId");
 
@@ -603,8 +597,6 @@ namespace JobSearch.DAL.Migrations
                     b.HasIndex("PhoneId");
 
                     b.HasIndex("TypeOfVacancyId");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkTypeId");
 
@@ -867,27 +859,11 @@ namespace JobSearch.DAL.Migrations
 
             modelBuilder.Entity("JobSearch.Core.Entities.Company", b =>
                 {
-                    b.HasOne("JobSearch.Core.Entities.Email", "Email")
-                        .WithMany("Companies")
-                        .HasForeignKey("EmailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JobSearch.Core.Entities.Phone", "Phone")
-                        .WithMany("Companies")
-                        .HasForeignKey("PhoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("JobSearch.Core.Entities.AppUser", "User")
                         .WithMany("Companies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Email");
-
-                    b.Navigation("Phone");
 
                     b.Navigation("User");
                 });
@@ -1011,6 +987,12 @@ namespace JobSearch.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("JobSearch.Core.Entities.Company", "Company")
+                        .WithMany("Vacancies")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("JobSearch.Core.Entities.Education", "Education")
                         .WithMany("Vacancies")
                         .HasForeignKey("EducationId")
@@ -1053,12 +1035,6 @@ namespace JobSearch.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JobSearch.Core.Entities.AppUser", "User")
-                        .WithMany("Vacancies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("JobSearch.Core.Entities.WorkType", "WorkType")
                         .WithMany("Vacancies")
                         .HasForeignKey("WorkTypeId")
@@ -1068,6 +1044,8 @@ namespace JobSearch.DAL.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("City");
+
+                    b.Navigation("Company");
 
                     b.Navigation("Education");
 
@@ -1082,8 +1060,6 @@ namespace JobSearch.DAL.Migrations
                     b.Navigation("Phone");
 
                     b.Navigation("TypeOfVacancy");
-
-                    b.Navigation("User");
 
                     b.Navigation("WorkType");
                 });
@@ -1158,6 +1134,8 @@ namespace JobSearch.DAL.Migrations
             modelBuilder.Entity("JobSearch.Core.Entities.Company", b =>
                 {
                     b.Navigation("SocialMediaCompany");
+
+                    b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("JobSearch.Core.Entities.Education", b =>
@@ -1169,8 +1147,6 @@ namespace JobSearch.DAL.Migrations
 
             modelBuilder.Entity("JobSearch.Core.Entities.Email", b =>
                 {
-                    b.Navigation("Companies");
-
                     b.Navigation("Seekers");
 
                     b.Navigation("Vacancies");
@@ -1197,8 +1173,6 @@ namespace JobSearch.DAL.Migrations
 
             modelBuilder.Entity("JobSearch.Core.Entities.Phone", b =>
                 {
-                    b.Navigation("Companies");
-
                     b.Navigation("Seekers");
 
                     b.Navigation("Vacancies");
@@ -1231,8 +1205,6 @@ namespace JobSearch.DAL.Migrations
                     b.Navigation("Companies");
 
                     b.Navigation("Seekers");
-
-                    b.Navigation("Vacancies");
                 });
 #pragma warning restore 612, 618
         }

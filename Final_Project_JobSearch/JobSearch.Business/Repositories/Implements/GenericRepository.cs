@@ -34,18 +34,7 @@ namespace JobSearch.Business.Repositories.Implements
             }
             return noTracking ? query.AsNoTracking() : query;
         }
-        public IQueryable<T> GetAllActive(bool noTracking = true, params string[] include)
-        {
-            IQueryable<T> query = Table.AsQueryable();
-            if (include != null && include.Length > 0)
-            {
-                foreach (var item in include)
-                {
-                    query = query.Include(item);
-                }
-            }
-            return noTracking ? query.AsNoTracking() : query;
-        }
+ 
 
 
         public async Task<bool> IsExistAsync(Expression<Func<T, bool>> expression)

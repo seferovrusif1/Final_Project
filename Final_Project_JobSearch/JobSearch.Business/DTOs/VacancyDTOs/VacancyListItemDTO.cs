@@ -1,15 +1,13 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.Business.DTOs.VacancyDTOs
 {
     public class VacancyListItemDTO
     {
         public int Id { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyAbout { get; set; }
+        public string UserName { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDleted { get; set; }
         public string Email { get; set; }

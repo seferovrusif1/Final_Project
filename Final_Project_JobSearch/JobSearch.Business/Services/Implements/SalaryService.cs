@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.DTOs.PhoneDTOs;
 using JobSearch.Business.DTOs.SalaryDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
@@ -36,6 +37,22 @@ namespace JobSearch.Business.Services.Implements
         {
             var data = _repo.GetAll();
             return _mapper.Map<IEnumerable<SalaryListItemDTO>>(data);
+        }
+        public async Task Update(int id, SalaryUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Salary>();
+            if (await _repo.IsExistAsync(r => r.Amount.ToLower() == dto.Amount.ToLower()))
+                throw new AlreadyExistException<Salary>();
+            data = _mapper.Map(dto, data);
+            await _repo.SaveAsync();
+        }
+        public async Task Delete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<Salary>();
+            _repo.Remove(data);
+            await _repo.SaveAsync();
         }
     }
 }

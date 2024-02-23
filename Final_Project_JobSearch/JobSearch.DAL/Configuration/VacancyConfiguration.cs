@@ -36,10 +36,6 @@ namespace JobSearch.DAL.Configuration
             builder.Property(a => a.Website)
                 .HasMaxLength(256);
 
-            builder.HasOne(x => x.User)
-                 .WithMany(u => u.Vacancies)
-                 .HasForeignKey(x => x.UserId)
-                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Email)
                  .WithMany(u => u.Vacancies)
@@ -51,9 +47,9 @@ namespace JobSearch.DAL.Configuration
                  .HasForeignKey(x => x.PhoneId)
                  .OnDelete(DeleteBehavior.NoAction);
 
-            //builder.HasOne(x => x.Company)
-            //     .WithMany(u => u.Vacancies)
-            //     .HasForeignKey(x => x.CompanyId);
+            builder.HasOne(x => x.Company)
+                 .WithMany(u => u.Vacancies)
+                 .HasForeignKey(x => x.CompanyId);
 
             builder.HasOne(x => x.Category)
                .WithMany(u => u.Vacancies)

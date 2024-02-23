@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using JobSearch.Business.DTOs.CategoryDTOs;
-using JobSearch.Business.DTOs.EmailDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
 using JobSearch.Business.Services.Interfaces;
 using JobSearch.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobSearch.Business.Services.Implements
 {

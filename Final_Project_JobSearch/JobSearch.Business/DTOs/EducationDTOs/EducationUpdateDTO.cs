@@ -2,13 +2,12 @@
 
 namespace JobSearch.Business.DTOs.EducationDTOs
 {
-    public class EducationCreateDTO
-    {
-        public string Degree { get; set; }
+    public class EducationUpdateDTO
+    {   public string Degree { get; set; }
     }
-    public class EducationCreateDTOValidtor : AbstractValidator<EducationCreateDTO>
+    public class EducationUpdateDTOValidtor : AbstractValidator<EducationUpdateDTO>
     {
-        public EducationCreateDTOValidtor()
+        public EducationUpdateDTOValidtor()
         {
             RuleFor(a=>a.Degree)
                 .NotEmpty()

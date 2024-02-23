@@ -1,10 +1,4 @@
-﻿using JobSearch.Business.DTOs.SocialMediaDTOs;
-using JobSearch.Business.DTOs.TypeOfVacancyDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JobSearch.Business.DTOs.TypeOfVacancyDTOs;
 
 namespace JobSearch.Business.Services.Interfaces
 {
@@ -12,5 +6,7 @@ namespace JobSearch.Business.Services.Interfaces
     {
         public IEnumerable<TypeOfVacancyListItemDTO> GetAll();
         public Task CreateAsync(TypeOfVacancyCreateDTO dto);
+        Task Update(int id, TypeOfVacancyUpdateDTO dto);
+        Task Delete(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using JobSearch.Business.DTOs.VacancyDTOs;
+﻿using JobSearch.Business.DTOs.CompanyDTOs;
+using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,11 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
 
-        //[HttpGet("GetAllActive")]
-        //public IActionResult GetActive()
-        //{
-        //    return Ok(_service.GetAllActive());
-        //}
+        [HttpGet("GetAllActive")]
+        public IActionResult GetActive()
+        {
+            return Ok(_service.GetAllActive());
+        }
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateVacancyAsync(VacancyCreateDTO dto)
@@ -76,6 +77,19 @@ namespace JobSearch.Api.Controllers
         {
             await _service.ReversePremium(id);
             return Ok();
+        }
+        [HttpPut("Update")]
+        [Authorize]
+        public async Task<IActionResult> UpdatedVacancyAsync(int id, VacancyUpdateDTO dto)
+        {
+            await _service.Update(id, dto);
+            return Ok();
+        }
+     
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.GetByIdAsync(id));
         }
     }
 }

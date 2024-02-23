@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSearch.Business.DTOs.CompanyDTOs;
 using JobSearch.Business.DTOs.JobSeekerDTOs;
 using JobSearch.Business.DTOs.VacancyDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
@@ -34,9 +35,7 @@ namespace JobSearch.Business.Services.Implements
 
         public async Task CreateAsync(JobSeekerCreateDTO dto)
         {
-            //if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
-            //    throw new Exception("Already exist");
-            ///TODO:getbyid ile parent id olub olmadigini tap
+       
             JobSeeker data = new JobSeeker
             {
                 Name=dto.Name,
@@ -56,6 +55,7 @@ namespace JobSearch.Business.Services.Implements
                 LanguageSkills=dto.LanguageSkills,
                 AdditionalInformation  =dto.AdditionalInformation,
                 BirthDate= dto.BirthDate,
+                LastActiveTime=DateTime.Now
             };
             data.UserId = userId;
             ///TODO:daha optimal ola bilerdi(ilk create edib exception tut ama unique lazmdi
@@ -79,7 +79,9 @@ namespace JobSearch.Business.Services.Implements
         }
         public IEnumerable<JobSeekerListItemDTO> GetAllActive()
         {
-            var data = _repo.GetAll(true, "Phone", "Email", "Category",  "Gender", "Education", "ExperienceYear", "City").Select(a =>!a.IsDleted);
+            var data = _repo.GetAll(true, "Phone", "Email", "Category",  "Gender", "Education", "ExperienceYear", "City")
+                .Where(a=>!a.IsDleted && a.IsConfirmed && a.IsDleted == false && a.LastActiveTime>DateTime.Now)
+                .OrderByDescending(q=>q.IsPremium);
             return _mapper.Map<IEnumerable<JobSeekerListItemDTO>>(data);
 
         }
@@ -123,6 +125,7 @@ namespace JobSearch.Business.Services.Implements
             var data = await _repo.GetByIdAsync(id, false);
             if (data == null) throw new NotFoundException<JobSeeker>();
             data.IsConfirmed = true;
+            data.LastActiveTime = DateTime.Now.AddDays(30);
             await _repo.SaveAsync();
 
         }
@@ -141,6 +144,56 @@ namespace JobSearch.Business.Services.Implements
             data.IsPremium = false;
             await _repo.SaveAsync();
 
+        }
+
+        public async Task Update(int id, JobSeekerUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<JobSeeker>();
+            if (data.UserId != userId) throw new Exception("User has no access");
+
+            data.Name = dto.Name;
+            data.Surname = dto.Surname;
+            data.FatherName = dto.FatherName;
+            data.ImageUrl = dto.ImageUrl;
+            data.CVImgUrl = dto.CVImgUrl;
+            data.CategoryId = dto.CategoryId;
+            data.GenderId = dto.GenderId;
+            data.EducationId = dto.EducationId;
+            data.EducationDetail = dto.EducationDetail;
+            data.ExperienceYearId = dto.ExperienceYearId;
+            data.ExperienceDetail = dto.ExperienceDetail;
+            data.Position = dto.Position;
+            data.CityId = dto.CityId;
+            data.Skills = dto.Skills;
+            data.LanguageSkills = dto.LanguageSkills;
+            data.AdditionalInformation = dto.AdditionalInformation;
+            data.BirthDate = dto.BirthDate;
+
+            data.IsConfirmed = false;
+            if (_emailRepo.GetIdFromEmail(dto.Email) == 0)
+            {
+                Email email = new Email { EmailAddress = dto.Email };
+                await _emailRepo.CreateAsync(email);
+                await _emailRepo.SaveAsync();
+            }
+            data.EmailId = _emailRepo.GetIdFromEmail(dto.Email);
+
+            if (_phoneRepo.GetIdFromNumber(dto.Phone) == 0)
+            {
+                Phone phone = new Phone { Number = dto.Phone };
+                await _phoneRepo.CreateAsync(phone);
+                await _phoneRepo.SaveAsync();
+            }
+            data.PhoneId = _phoneRepo.GetIdFromNumber(dto.Phone);
+            await _repo.SaveAsync();
+        }
+       
+        public async Task<JobSeekerInfoDTO> GetByIdAsync(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, true);
+            if (data == null) throw new NotFoundException<JobSeeker>("JobSeeker Not Found");
+            return _mapper.Map<JobSeekerInfoDTO>(data);
         }
     }
 }

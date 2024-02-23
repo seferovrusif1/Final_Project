@@ -1,4 +1,5 @@
-﻿using JobSearch.Business.DTOs.VacancyDTOs;
+﻿using JobSearch.Business.DTOs.JobSeekerDTOs;
+using JobSearch.Business.DTOs.VacancyDTOs;
 
 namespace JobSearch.Business.Services.Interfaces
 {
@@ -12,6 +13,9 @@ namespace JobSearch.Business.Services.Interfaces
         Task ReverseSoftDelete(int id);
         Task Confirmed(int id); 
         Task ReversePremium(int id); 
-        Task MakePremium(int id); 
+        Task MakePremium(int id);
+        Task Update(int id, VacancyUpdateDTO dto);
+        public Task<VacancyInfoDTO> GetByIdAsync(int id);
+
     }
 }

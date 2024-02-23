@@ -31,6 +31,7 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
         public string LanguageSkills { get; set; }
         public string AdditionalInformation { get; set; }
         public DateTime BirthDate { get; set; }
+        public DateTime LastActiveTime { get; set; }
     }
     public class JobSeekerListItemDTOValidator : AbstractValidator<JobSeekerListItemDTO>
     {

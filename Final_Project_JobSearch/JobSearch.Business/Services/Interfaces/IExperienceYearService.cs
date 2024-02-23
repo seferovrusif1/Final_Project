@@ -12,5 +12,7 @@ namespace JobSearch.Business.Services.Interfaces
     {
         public IEnumerable<ExperienceYearListItemDTO> GetAll();
         public Task CreateAsync(ExperienceYearCreateDTO dto);
+        Task Delete(int id);
+        Task Update(int id, ExperienceYearUpdateDTO dto);
     }
 }

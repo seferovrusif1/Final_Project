@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using JobSearch.Business.DTOs.VacancyDTOs;
-using JobSearch.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobSearch.Business.DTOs.JobSeekerDTOs
 {
-    public class JobSeekerCreateDTO
+    public class JobSeekerUpdateDTO
     {
         public string Email { get; set; }
         public string Phone { get; set; }
@@ -31,9 +29,9 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
         public string AdditionalInformation { get; set; }
         public DateTime BirthDate { get; set; }
     }
-    public class JobSeekerCreateDTOValidator : AbstractValidator<JobSeekerCreateDTO>
+    public class JobSeekerUpdateDTOValidator : AbstractValidator<JobSeekerUpdateDTO>
     {
-        public JobSeekerCreateDTOValidator()
+        public JobSeekerUpdateDTOValidator()
         {
             RuleFor(x => x.Email)
                 .NotEmpty()
@@ -74,7 +72,7 @@ namespace JobSearch.Business.DTOs.JobSeekerDTOs
             RuleFor(a => a.AdditionalInformation)
                .MaximumLength(1024);
             RuleFor(a => a.BirthDate)
-                .LessThan(DateTime.Now.AddYears(13)); 
+                .LessThan(DateTime.Now.AddYears(13));
             RuleFor(a => a.ExperienceDetail)
               .NotEmpty()
               .NotNull()

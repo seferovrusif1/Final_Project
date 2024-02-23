@@ -13,5 +13,7 @@ namespace JobSearch.Business.Services.Interfaces
         Task Confirmed(int id);
         Task ReversePremium(int id);
         Task MakePremium(int id);
+        Task Update(int id, JobSeekerUpdateDTO dto);
+        public Task<JobSeekerInfoDTO> GetByIdAsync(int id);
     }
 }

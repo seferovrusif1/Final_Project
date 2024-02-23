@@ -28,11 +28,12 @@ namespace JobSearch.Api.Controllers
             return Ok(_service.GetAll());
         }
 
-        //[HttpGet("GetAllActive")]
-        //public IActionResult GetActive()
-        //{
-        //    return Ok(_service.GetAllActive());
-        //}
+        [HttpGet("GetAllActive")]
+        public IActionResult GetActive()
+        {
+            return Ok(_service.GetAllActive());
+        }
+       
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateCompanyAsync(CompanyCreateDTO dto)
@@ -69,12 +70,24 @@ namespace JobSearch.Api.Controllers
             await _service.Delete(id);
             return Ok();
         }
-        [HttpPut]
+        [HttpPut("Confirmed")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ConfirmedCompanyAsync(int id)
         {
             await _service.Confirmed(id);
             return Ok();
+        }
+        [HttpPut("Update")]
+        [Authorize]
+        public async Task<IActionResult> UpdatedCompanyAsync(int id,CompanyUpdateDTO dto)
+        {
+            await _service.Update(id,dto);
+            return Ok();
+        }
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.GetByIdAsync(id));
         }
     }
 }

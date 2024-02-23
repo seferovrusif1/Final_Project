@@ -6,5 +6,7 @@ namespace JobSearch.Business.Services.Interfaces
     {
         public IEnumerable<WorkTypeListItemDTO> GetAll();
         public Task CreateAsync(WorkTypeCreateDTO dto);
+        Task Delete(int id);
+        Task Update(int id, WorkTypeUpdateDTO dto);
     }
 }

@@ -9,7 +9,9 @@ namespace JobSearch.Business.Profiles
         public GenderMappingProfile()
         {
             CreateMap<GenderCreateDTO,Gender>();
+            CreateMap<GenderUpdateDTO, Gender>();
             CreateMap<Gender,GenderListItemDTO>();
         }
     }
 }
+

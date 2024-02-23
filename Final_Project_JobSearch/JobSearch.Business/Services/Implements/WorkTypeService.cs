@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSearch.Business.DTOs.EducationDTOs;
 using JobSearch.Business.DTOs.WorkTypeDTOs;
 using JobSearch.Business.Exceptions.CommonExceptions;
 using JobSearch.Business.Repositories.Interfaces;
@@ -32,6 +33,22 @@ namespace JobSearch.Business.Services.Implements
             var data = _repo.GetAll();
             return _mapper.Map<IEnumerable<WorkTypeListItemDTO>>(data);
 
+        }
+        public async Task Update(int id, WorkTypeUpdateDTO dto)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<WorkType>();
+            if (await _repo.IsExistAsync(r => r.Title.ToLower() == dto.Title.ToLower()))
+                throw new AlreadyExistException<WorkType>();
+            data = _mapper.Map(dto, data);
+            await _repo.SaveAsync();
+        }
+        public async Task Delete(int id)
+        {
+            var data = await _repo.GetByIdAsync(id, false);
+            if (data == null) throw new NotFoundException<WorkType>();
+            _repo.Remove(data);
+            await _repo.SaveAsync();
         }
     }
 }

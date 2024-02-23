@@ -11,5 +11,7 @@ namespace JobSearch.Business.Services.Interfaces
     {
         public IEnumerable<SalaryListItemDTO> GetAll();
         public Task CreateAsync(SalaryCreateDTO dto);
+        Task Delete(int id);
+        Task Update(int id, SalaryUpdateDTO dto);
     }
 }

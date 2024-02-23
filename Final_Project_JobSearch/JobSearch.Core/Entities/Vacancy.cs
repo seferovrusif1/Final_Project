@@ -2,14 +2,12 @@
 {
     public class Vacancy : BaseEntity
     {
-        public string UserId { get; set; }
-        public AppUser?  User { get; set; }
         public int EmailId { get; set; }
         public Email? Email { get; set; }
         public int PhoneId { get; set; }
         public Phone? Phone { get; set; }
-        //public int CompanyId { get; set; }
-        //public Company? Company { get; set; }
+        public int CompanyId { get; set; }
+        public Company? Company { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public string Position { get; set; }
